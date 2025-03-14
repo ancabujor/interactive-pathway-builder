@@ -6,7 +6,6 @@ import { toast } from 'sonner';
 import SimpleFooter from '@/components/SimpleFooter';
 import Step3Header from '@/components/step3/Step3Header';
 import CalculatorSection from '@/components/step3/CalculatorSection';
-import WhiteGloveServiceCard from '@/components/step3/WhiteGloveServiceCard';
 import TrustBuilders from '@/components/step3/TrustBuilders';
 import Step3Navigation from '@/components/step3/Step3Navigation';
 
@@ -52,11 +51,6 @@ const Step3 = () => {
                 onSelectPlan={handleSelectPlan} 
                 onRequestConsultation={handleConsultationRequest} 
               />
-            </div>
-
-            {/* White Glove Service - centered */}
-            <div className="w-full mt-4">
-              <WhiteGloveServiceCard onRequestConsultation={handleConsultationRequest} />
             </div>
           </div>
 
