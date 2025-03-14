@@ -28,15 +28,17 @@ const MainContent: React.FC<MainContentProps> = ({
     <div className="flex-1 flex flex-col overflow-hidden">
       <Header companyName={companyName} />
       
-      <div className="flex-1 overflow-auto p-2 md:p-4 bg-gray-50">
-        <ReceptionistsHeader />
-        <QuickActionsSection location={location} />
-        <ClientsSection 
-          clientCount={clientCount} 
-          clients={clients} 
-          remainingSlots={remainingSlots} 
-        />
-        <TrialAccountsSection />
+      <div className="flex-1 overflow-hidden p-1 md:p-2 bg-gray-50">
+        <div className="h-full overflow-auto">
+          <ReceptionistsHeader />
+          <QuickActionsSection location={location} />
+          <ClientsSection 
+            clientCount={clientCount} 
+            clients={clients} 
+            remainingSlots={remainingSlots} 
+          />
+          <TrialAccountsSection />
+        </div>
       </div>
     </div>
   );

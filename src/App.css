@@ -58,3 +58,12 @@
   max-height: 100%;
   overflow: hidden;
 }
+
+/* Dashboard container */
+.dashboard-container {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
