@@ -50,15 +50,15 @@ const Step3 = () => {
 
       <main className="flex-1 flex flex-col">
         {/* Main content */}
-        <div className="flex-1 flex flex-col px-4 pb-3">
-          <div className="flex-1 grid md:grid-cols-2 gap-4">
+        <div className="flex-1 flex flex-col px-4 pb-3 items-center">
+          <div className="w-full max-w-[60%] mx-auto">
             {/* Calculator section - centered */}
-            <div className="md:col-span-1 flex justify-center">
+            <div className="w-full">
               <CalculatorSection onSelectPlan={handleSelectPlan} />
             </div>
 
             {/* White Glove Service - centered */}
-            <div className="md:col-span-1 flex justify-center">
+            <div className="w-full mt-4">
               <WhiteGloveServiceCard onRequestConsultation={handleConsultationRequest} />
             </div>
           </div>
