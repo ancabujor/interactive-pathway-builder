@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
@@ -12,9 +11,16 @@ import { ArrowLeft, AlertCircle } from 'lucide-react';
 
 const Step2 = () => {
   const navigate = useNavigate();
-  const { userData, updateUserData, setCurrentStep, currentStep } = useUserContext();
+  const { userData, updateUserData, currentStep, setCurrentStep } = useUserContext();
   const [stage, setStage] = useState<'location' | 'email'>('location');
   const [email, setEmail] = useState(userData.email || '');
+
+  // Ensure the current step is set correctly when this component loads
+  useEffect(() => {
+    if (currentStep !== 2) {
+      setCurrentStep(2);
+    }
+  }, []);
 
   // Validate if we have the required information to continue
   useEffect(() => {
@@ -65,7 +71,7 @@ const Step2 = () => {
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-secondary/30">
       {/* Progress indicator */}
-      <ProgressIndicator currentStep={currentStep} />
+      <ProgressIndicator currentStep={2} />
 
       <main className="flex-1 flex flex-col px-4 py-4 overflow-hidden">
         {/* Page title */}
