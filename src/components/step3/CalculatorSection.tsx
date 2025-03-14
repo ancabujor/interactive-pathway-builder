@@ -3,8 +3,8 @@ import React from 'react';
 import { useUserContext } from '@/context/UserContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
-import PricingCalculator from '@/components/PricingCalculator';
 import { ArrowRight, Users, MessageCircle } from 'lucide-react';
+import PlanSelector from '@/components/step3/PlanSelector';
 
 interface CalculatorSectionProps {
   onSelectPlan: () => void;
@@ -23,7 +23,7 @@ const CalculatorSection: React.FC<CalculatorSectionProps> = ({ onSelectPlan, onR
         </div>
       </CardHeader>
       <CardContent className="pt-0 pb-3 px-3 flex-1">
-        <PricingCalculator initialClientCount={userData.clientCount || 5} />
+        <PlanSelector initialClientCount={userData.clientCount || 5} />
       </CardContent>
       <CardFooter className="py-3 border-t flex flex-col space-y-2">
         <Button 
