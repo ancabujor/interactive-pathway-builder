@@ -6,8 +6,7 @@ import {
   Users, Phone, Calculator, DollarSign, 
   Plus, Settings, LogOut, BookOpen, 
   Globe, FileText, Box, LifeBuoy, 
-  File, User, Package, Briefcase, Building,
-  Palette, Type, Image, LayoutTemplate
+  File, User, Package, Briefcase, Building
 } from 'lucide-react';
 
 interface DashboardContentProps {
@@ -80,39 +79,10 @@ const DashboardContent: React.FC<DashboardContentProps> = ({ userData }) => {
                 <span>Embed</span>
               </div>
               
-              {/* Branding Configuration section */}
-              <div className="hidden md:block">
-                <div className="flex items-center text-gray-700 px-3 py-2 my-1 font-medium">
-                  <span>Style Editor</span>
-                </div>
-                
-                <div className="pl-3">
-                  <div className="flex items-center text-gray-700 px-3 py-1 rounded-md my-1 hover:bg-gray-100">
-                    <Palette className="h-4 w-4 mr-2 text-purple-500" />
-                    <span className="text-sm">Theme</span>
-                  </div>
-                  
-                  <div className="flex items-center text-gray-700 px-3 py-1 rounded-md my-1 hover:bg-gray-100">
-                    <Type className="h-4 w-4 mr-2 text-blue-500" />
-                    <span className="text-sm">Fonts</span>
-                  </div>
-                  
-                  <div className="flex items-center text-gray-700 px-3 py-1 rounded-md my-1 hover:bg-gray-100">
-                    <Image className="h-4 w-4 mr-2 text-green-500" />
-                    <span className="text-sm">Images</span>
-                  </div>
-                  
-                  <div className="flex items-center text-gray-700 px-3 py-1 rounded-md my-1 hover:bg-gray-100">
-                    <LayoutTemplate className="h-4 w-4 mr-2 text-orange-500" />
-                    <span className="text-sm">Templates</span>
-                  </div>
-                </div>
-              </div>
-              
               <div className="hidden md:flex items-center justify-between text-gray-700 px-3 py-2 rounded-md my-1 hover:bg-gray-100">
                 <div className="flex items-center">
                   <Settings className="h-5 w-5 mr-2" />
-                  <span>Settings</span>
+                  <span>Branding Configuration</span>
                 </div>
                 <span>▼</span>
               </div>
