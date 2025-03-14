@@ -1,22 +1,12 @@
 
 import React, { useState } from 'react';
 import { useUserContext } from '@/context/UserContext';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
-import { MapPin, ArrowRight, Globe, Mail, Users, Building } from 'lucide-react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
-// Qualified locations
-const QUALIFIED_LOCATIONS = ['United States', 'United Kingdom', 'Australia'];
+import LocationSelector, { QUALIFIED_LOCATIONS } from '@/components/location/LocationSelector';
+import CompanyDetailsForm from '@/components/company/CompanyDetailsForm';
+import WaitlistForm from '@/components/waitlist/WaitlistForm';
+import LocationNotification from '@/components/notifications/LocationNotification';
 
 interface LocationCheckerProps {
   onQualified: () => void;
@@ -119,119 +109,35 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
         <div className="space-y-2">
           {!showWaitlist ? (
             <>
-              <div className="space-y-1">
-                <Label htmlFor="location">Where are your clients located?</Label>
-                <div className="relative">
-                  <Select 
-                    value={location} 
-                    onValueChange={handleLocationChange}
-                  >
-                    <SelectTrigger id="location" className="w-full">
-                      <div className="flex items-center">
-                        <Globe className="mr-2 h-4 w-4 text-muted-foreground" />
-                        <SelectValue placeholder="Select client location" />
-                      </div>
-                    </SelectTrigger>
-                    <SelectContent>
-                      {QUALIFIED_LOCATIONS.map((country) => (
-                        <SelectItem key={country} value={country}>
-                          {country}
-                        </SelectItem>
-                      ))}
-                      <SelectItem value="Not listed">Not listed</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
+              <LocationSelector 
+                location={location} 
+                onLocationChange={handleLocationChange} 
+              />
               
-              {userData.isQualified === false && userData.location && userData.location !== 'Not listed' && (
-                <div className="text-xs p-2 bg-muted rounded-md">
-                  <p className="font-medium">Your location is on our waitlist</p>
-                  <p className="text-muted-foreground mt-0.5">
-                    We'll notify you when we're available in your area.
-                  </p>
-                </div>
-              )}
+              <LocationNotification 
+                location={userData.location} 
+                isQualified={userData.isQualified} 
+              />
 
-              <div className="space-y-1 mt-4">
-                <Label htmlFor="company-name">Company Name</Label>
-                <div className="relative">
-                  <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                  <Input 
-                    id="company-name"
-                    placeholder="Your Agency or Company" 
-                    value={companyName}
-                    onChange={handleCompanyNameChange}
-                    className="pl-9"
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-1 mt-4">
-                <Label htmlFor="client-count">Number of Clients</Label>
-                <div className="relative">
-                  <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                  <Input 
-                    id="client-count"
-                    type="number" 
-                    min="1"
-                    placeholder="5" 
-                    value={clientCount}
-                    onChange={handleClientCountChange}
-                    className="pl-9"
-                  />
-                </div>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Estimate how many clients you'll onboard in the first year
-                </p>
-              </div>
+              <CompanyDetailsForm 
+                companyName={companyName}
+                clientCount={clientCount}
+                onCompanyNameChange={handleCompanyNameChange}
+                onClientCountChange={handleClientCountChange}
+              />
             </>
           ) : (
-            <div className="space-y-3">
-              <div className="text-xs p-2 bg-blue-100 text-blue-800 rounded-md">
-                <p className="font-medium">Join our waitlist</p>
-                <p className="mt-0.5">
-                  We're not available in your region yet, but we're expanding quickly!
-                </p>
-              </div>
-              
-              <div className="space-y-1">
-                <Label htmlFor="waitlist-email">Email Address</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                  <Input 
-                    id="waitlist-email"
-                    placeholder="you@example.com" 
-                    value={waitlistEmail}
-                    onChange={(e) => setWaitlistEmail(e.target.value)}
-                    className="pl-9"
-                    type="email"
-                  />
-                </div>
-              </div>
-            </div>
+            <WaitlistForm 
+              waitlistEmail={waitlistEmail}
+              onEmailChange={(e) => setWaitlistEmail(e.target.value)}
+              onSubmit={submitWaitlist}
+              loading={loading}
+            />
           )}
         </div>
       </CardContent>
       <CardFooter className="py-2">
-        {showWaitlist && (
-          <Button 
-            className="w-full"
-            onClick={submitWaitlist}
-            disabled={loading}
-            size="sm"
-          >
-            {loading ? (
-              <span className="inline-flex items-center">
-                Submitting... <span className="ml-2">⋯</span>
-              </span>
-            ) : (
-              <span className="inline-flex items-center">
-                Join Waitlist <ArrowRight className="ml-2 w-4 h-4" />
-              </span>
-            )}
-          </Button>
-        )}
+        {/* Card footer intentionally left empty as it was in the original component */}
       </CardFooter>
     </Card>
   );
