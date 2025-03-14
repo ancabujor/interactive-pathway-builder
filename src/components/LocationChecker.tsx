@@ -92,64 +92,69 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
             isQualified={userData.isQualified} 
           />
 
-          {!showWaitlist ? (
-            <CompanyDetailsForm 
-              companyName={companyName}
-              clientCount={clientCount}
-              onCompanyNameChange={handleCompanyNameChange}
-              onClientCountChange={handleClientCountChange}
-            />
-          ) : (
+          {location === 'Not listed' ? (
             <WaitlistForm 
               waitlistEmail={waitlistEmail}
               onEmailChange={(e) => setWaitlistEmail(e.target.value)}
               onSubmit={submitWaitlist}
               loading={loading}
             />
-          )}
-
-          {!showEmailField ? (
-            <Button 
-              onClick={handleReadyClick} 
-              className="w-full mt-4"
-              variant="default"
-              disabled={!location}
-            >
-              I'm ready to start my AI business <ArrowRight className="ml-2" />
-            </Button>
           ) : (
-            <Collapsible open={true} className="mt-3">
-              <CollapsibleContent className="mt-3 space-y-2">
-                <div className="bg-muted/50 p-2 rounded text-sm">
-                  <p className="font-medium">Awesome! One last thing...</p>
-                </div>
-                <div className="space-y-1">
-                  <Label htmlFor="ready-email">Email Address</Label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                    <Input 
-                      id="ready-email"
-                      placeholder="you@example.com" 
-                      value={readyEmail}
-                      onChange={handleEmailChange}
-                      className={`pl-9 ${emailError ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
-                      type="email"
-                    />
-                  </div>
-                  {emailError && (
-                    <p className="text-xs text-red-500 mt-1">{emailError}</p>
-                  )}
-                  <Button 
-                    onClick={handleSubmitEmail} 
-                    className="w-full mt-2"
-                    disabled={!readyEmail || !!emailError}
-                    size="sm"
-                  >
-                    Start My AI Business <ArrowRight className="ml-1 w-3 h-3" />
-                  </Button>
-                </div>
-              </CollapsibleContent>
-            </Collapsible>
+            <>
+              {location && !showWaitlist && (
+                <CompanyDetailsForm 
+                  companyName={companyName}
+                  clientCount={clientCount}
+                  onCompanyNameChange={handleCompanyNameChange}
+                  onClientCountChange={handleClientCountChange}
+                />
+              )}
+
+              {!showEmailField && location ? (
+                <Button 
+                  onClick={handleReadyClick} 
+                  className="w-full mt-4"
+                  variant="default"
+                >
+                  I'm ready to start my AI business <ArrowRight className="ml-2" />
+                </Button>
+              ) : null}
+
+              {showEmailField && (
+                <Collapsible open={true} className="mt-3">
+                  <CollapsibleContent className="mt-3 space-y-2">
+                    <div className="bg-muted/50 p-2 rounded text-sm">
+                      <p className="font-medium">Awesome! One last thing...</p>
+                    </div>
+                    <div className="space-y-1">
+                      <Label htmlFor="ready-email">Email Address</Label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                        <Input 
+                          id="ready-email"
+                          placeholder="you@example.com" 
+                          value={readyEmail}
+                          onChange={handleEmailChange}
+                          className={`pl-9 ${emailError ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
+                          type="email"
+                        />
+                      </div>
+                      {emailError && (
+                        <p className="text-xs text-red-500 mt-1">{emailError}</p>
+                      )}
+                      <Button 
+                        onClick={handleSubmitEmail} 
+                        className="w-full mt-2"
+                        disabled={!readyEmail || !!emailError}
+                        size="sm"
+                      >
+                        Start My AI Business <ArrowRight className="ml-1 w-3 h-3" />
+                      </Button>
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
+              )}
+            </>
           )}
         </div>
       </CardContent>

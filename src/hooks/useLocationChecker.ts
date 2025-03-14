@@ -11,7 +11,7 @@ export function useLocationChecker({ onQualified }: UseLocationCheckerProps) {
   const { userData, updateUserData } = useUserContext();
   const [location, setLocation] = useState(userData.location || '');
   const [loading, setLoading] = useState(false);
-  const [showWaitlist, setShowWaitlist] = useState(false);
+  const [showWaitlist, setShowWaitlist] = useState(userData.location === 'Not listed');
   const [waitlistEmail, setWaitlistEmail] = useState('');
   const [companyName, setCompanyName] = useState(userData.companyName || '');
   const [clientCount, setClientCount] = useState(userData.clientCount || 5);
