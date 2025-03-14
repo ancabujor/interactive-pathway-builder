@@ -78,7 +78,7 @@ const Step2 = () => {
         {/* Page title */}
         <section className="text-center mb-4">
           <h1 className="text-xl font-bold tracking-tight mb-1">
-            Personalized Assessment
+            Your Custom Business Opportunity
           </h1>
           <p className="text-sm text-muted-foreground">
             {getStageDescription()}
