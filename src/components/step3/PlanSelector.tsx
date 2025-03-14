@@ -18,7 +18,7 @@ const getFixedCostPerClient = (clientCount: number): number => {
   if (clientCount === 3) return 75;
   if (clientCount === 4) return 65;
   if (clientCount === 5) return 55;
-  return 50; // 6+ clients
+  return 50; // 10+ clients
 };
 
 const clientOptions = [
@@ -26,7 +26,7 @@ const clientOptions = [
   { value: "3", label: "3 Receptionists", cost: 75 },
   { value: "4", label: "4 Receptionists", cost: 65 },
   { value: "5", label: "5 Receptionists", cost: 55 },
-  { value: "6", label: "6+ Receptionists", cost: 50 },
+  { value: "10", label: "10+ Receptionists", cost: 50 },
 ];
 
 interface PlanSelectorProps {
