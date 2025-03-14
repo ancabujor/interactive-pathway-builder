@@ -40,7 +40,7 @@ const Calculator: React.FC<CalculatorProps> = ({
             </label>
             <Slider
               value={[inputs.clientCount]}
-              min={1}
+              min={2}
               max={50}
               step={1}
               onValueChange={(value) => updateInput('clientCount', value[0])}
@@ -68,9 +68,8 @@ const Calculator: React.FC<CalculatorProps> = ({
               <Input
                 type="number"
                 value={inputs.costPerClient}
-                onChange={(e) => updateInput('costPerClient', parseInt(e.target.value) || 0)}
-                className="text-right h-8 text-sm"
-                min={0}
+                readOnly
+                className="text-right h-8 text-sm bg-muted/30 cursor-not-allowed"
               />
             </div>
           </div>
