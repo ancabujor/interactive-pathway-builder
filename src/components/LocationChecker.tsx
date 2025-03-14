@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -90,7 +91,7 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({
               {showEmailField && <Collapsible open={true} className="mt-3">
                   <CollapsibleContent className="mt-3 space-y-2">
                     <div className="bg-muted/50 p-2 rounded text-sm">
-                      <p className="font-medium">Awesome! One last thing...</p>
+                      <p className="font-medium">Perfect! Your personalized dashboard is ready. Where should we send your business plan?</p>
                     </div>
                     <div className="space-y-1">
                       <Label htmlFor="ready-email">Email Address</Label>
