@@ -41,7 +41,7 @@ const Calculator: React.FC<CalculatorProps> = ({
             <Slider
               value={[inputs.clientCount]}
               min={2}
-              max={50}
+              max={25}
               step={1}
               onValueChange={(value) => updateInput('clientCount', value[0])}
               className="py-1"
