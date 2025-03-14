@@ -1,16 +1,7 @@
 
 import React from 'react';
 import ClientCard from './ClientCard';
-import { User, Building, Package, File, Briefcase } from 'lucide-react';
-
-interface Client {
-  name: string;
-  type: {
-    title: string;
-    icon: React.ReactNode;
-  };
-  location: string;
-}
+import { Client } from '@/utils/clientUtils';
 
 interface ClientsSectionProps {
   clientCount: number;
