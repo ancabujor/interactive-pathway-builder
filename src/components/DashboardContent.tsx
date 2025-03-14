@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -148,7 +147,7 @@ const DashboardContent: React.FC<DashboardContentProps> = ({ userData }) => {
           </div>
           
           <div className="bg-white rounded-lg shadow-sm p-2 md:p-4 mb-3 md:mb-4">
-            <h2 className="text-sm md:text-lg font-bold mb-1 md:mb-2">Active Clients ({clientCount} / 5)</h2>
+            <h2 className="text-sm md:text-lg font-bold mb-1 md:mb-2">Active Clients ({clientCount})</h2>
             <p className="text-gray-600 text-xs md:text-sm mb-2 md:mb-4">
               {remainingSlots > 0 
                 ? `You have set up ${clientCount} of 5 accounts. You can add ${remainingSlots} more client(s).`
