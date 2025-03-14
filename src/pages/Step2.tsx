@@ -5,7 +5,6 @@ import { useUserContext } from '@/context/UserContext';
 import { Button } from '@/components/ui/button';
 import LocationChecker from '@/components/LocationChecker';
 import DashboardPreview from '@/components/DashboardPreview';
-import CompanyForm from '@/components/CompanyForm';
 import EmailForm from '@/components/EmailForm';
 import ProgressIndicator from '@/components/ProgressIndicator';
 import SimpleFooter from '@/components/SimpleFooter';
@@ -15,23 +14,12 @@ import { ArrowLeft } from 'lucide-react';
 const Step2 = () => {
   const navigate = useNavigate();
   const { userData, updateUserData, setCurrentStep, currentStep } = useUserContext();
-  const [stage, setStage] = useState<'location' | 'company' | 'preview' | 'email'>(
-    userData.isQualified ? 'company' : 'location'
+  const [stage, setStage] = useState<'location' | 'preview' | 'email'>(
+    userData.isQualified ? 'preview' : 'location'
   );
-  const [companyName, setCompanyName] = useState(userData.companyName || '');
-  const [clientCount, setClientCount] = useState(userData.clientCount || 5);
   const [email, setEmail] = useState(userData.email || '');
 
   const handleLocationQualified = () => {
-    setStage('company');
-  };
-
-  const handleCompanySubmit = () => {
-    updateUserData({ 
-      companyName, 
-      clientCount: Number(clientCount) || 5 
-    });
-    
     setStage('preview');
   };
 
@@ -45,10 +33,8 @@ const Step2 = () => {
     if (stage === 'location') {
       setCurrentStep(1);
       navigate('/step1');
-    } else if (stage === 'company') {
-      setStage('location');
     } else if (stage === 'preview') {
-      setStage('company');
+      setStage('location');
     } else if (stage === 'email') {
       setStage('preview');
     }
@@ -64,7 +50,6 @@ const Step2 = () => {
   const getStageDescription = () => {
     switch(stage) {
       case 'location': return "Let's check if your location qualifies for our program.";
-      case 'company': return "Tell us about your business to customize your experience.";
       case 'preview': return "Here's how your reseller dashboard would look.";
       case 'email': return "One last step - where should we send your personalized plan?";
       default: return "";
@@ -94,16 +79,6 @@ const Step2 = () => {
             <div className="flex flex-col space-y-4 overflow-y-auto">
               {stage === 'location' && (
                 <LocationChecker onQualified={handleLocationQualified} />
-              )}
-
-              {stage === 'company' && (
-                <CompanyForm 
-                  companyName={companyName}
-                  setCompanyName={setCompanyName}
-                  clientCount={clientCount}
-                  setClientCount={setClientCount}
-                  onSubmit={handleCompanySubmit}
-                />
               )}
 
               {stage === 'email' && (

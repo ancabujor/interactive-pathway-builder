@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
-import { MapPin, ArrowRight, Globe, Mail } from 'lucide-react';
+import { MapPin, ArrowRight, Globe, Mail, Users, Building } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -28,6 +28,8 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
   const [loading, setLoading] = useState(false);
   const [showWaitlist, setShowWaitlist] = useState(false);
   const [waitlistEmail, setWaitlistEmail] = useState('');
+  const [companyName, setCompanyName] = useState(userData.companyName || '');
+  const [clientCount, setClientCount] = useState(userData.clientCount || 5);
 
   const handleLocationChange = (value: string) => {
     setLocation(value);
@@ -97,6 +99,17 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
     }, 500);
   };
 
+  const handleCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCompanyName(e.target.value);
+    updateUserData({ companyName: e.target.value });
+  };
+
+  const handleClientCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const count = parseInt(e.target.value) || 0;
+    setClientCount(count);
+    updateUserData({ clientCount: count });
+  };
+
   return (
     <Card className="w-full mx-auto">
       <CardHeader className="py-3">
@@ -138,6 +151,43 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
                     We'll notify you when we're available in your area.
                   </p>
                 </div>
+              )}
+
+              {userData.isQualified && (
+                <>
+                  <div className="space-y-1 mt-4">
+                    <Label htmlFor="company-name">Company Name</Label>
+                    <div className="relative">
+                      <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                      <Input 
+                        id="company-name"
+                        placeholder="Your Agency or Company" 
+                        value={companyName}
+                        onChange={handleCompanyNameChange}
+                        className="pl-9"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-1 mt-4">
+                    <Label htmlFor="client-count">Number of Clients</Label>
+                    <div className="relative">
+                      <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                      <Input 
+                        id="client-count"
+                        type="number" 
+                        min="1"
+                        placeholder="5" 
+                        value={clientCount}
+                        onChange={handleClientCountChange}
+                        className="pl-9"
+                      />
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Estimate how many clients you'll onboard in the first year
+                    </p>
+                  </div>
+                </>
               )}
             </>
           ) : (
