@@ -9,6 +9,7 @@ import LocationChecker from '@/components/LocationChecker';
 import DashboardPreview from '@/components/DashboardPreview';
 import { toast } from 'sonner';
 import { ArrowLeft, ArrowRight, Building, Users, MailIcon, ChevronRight } from 'lucide-react';
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 
 const Step2 = () => {
   const navigate = useNavigate();
@@ -91,7 +92,7 @@ const Step2 = () => {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center px-4">
+      <main className="flex-1 flex flex-col px-4 py-4 overflow-hidden">
         {/* Page title */}
         <section className="text-center mb-4">
           <h1 className="text-xl font-bold tracking-tight mb-1">
@@ -105,119 +106,106 @@ const Step2 = () => {
           </p>
         </section>
 
-        {/* Dynamic content based on stage */}
-        <div className="w-full max-w-md">
-          {stage === 'location' && (
-            <div className="animate-scale-in">
-              <LocationChecker onQualified={handleLocationQualified} />
-            </div>
-          )}
+        {/* Two-column layout */}
+        <div className="flex-1 overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
+            {/* Left column - Form */}
+            <div className="flex flex-col space-y-4 overflow-y-auto">
+              {stage === 'location' && (
+                <LocationChecker onQualified={handleLocationQualified} />
+              )}
 
-          {stage === 'company' && (
-            <div className="space-y-4 animate-scale-in">
-              <div className="space-y-3">
-                <div className="space-y-1">
-                  <Label htmlFor="companyName">Company Name</Label>
-                  <div className="relative">
-                    <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                    <Input 
-                      id="companyName"
-                      placeholder="Your Company Name" 
-                      value={companyName}
-                      onChange={(e) => setCompanyName(e.target.value)}
-                      className="pl-9"
-                    />
+              {stage === 'company' && (
+                <div className="space-y-4">
+                  <div className="space-y-3">
+                    <div className="space-y-1">
+                      <Label htmlFor="companyName">Company Name</Label>
+                      <div className="relative">
+                        <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                        <Input 
+                          id="companyName"
+                          placeholder="Your Company Name" 
+                          value={companyName}
+                          onChange={(e) => setCompanyName(e.target.value)}
+                          className="pl-9"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <Label htmlFor="clientCount">Potential Clients</Label>
+                      <div className="relative">
+                        <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                        <Input 
+                          id="clientCount"
+                          type="number" 
+                          placeholder="How many clients could you sell to?" 
+                          value={clientCount}
+                          onChange={(e) => setClientCount(Number(e.target.value))}
+                          min={1}
+                          className="pl-9"
+                        />
+                      </div>
+                    </div>
                   </div>
-                </div>
 
-                <div className="space-y-1">
-                  <Label htmlFor="clientCount">Potential Clients</Label>
-                  <div className="relative">
-                    <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                    <Input 
-                      id="clientCount"
-                      type="number" 
-                      placeholder="How many clients could you sell to?" 
-                      value={clientCount}
-                      onChange={(e) => setClientCount(Number(e.target.value))}
-                      min={1}
-                      className="pl-9"
-                    />
+                  <Button 
+                    className="w-full"
+                    onClick={handleCompanySubmit}
+                  >
+                    Continue
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+              )}
+
+              {stage === 'email' && (
+                <div className="space-y-4">
+                  <div className="space-y-3">
+                    <p className="text-center text-sm">
+                      To receive your personalized plan and pricing:
+                    </p>
+                    
+                    <div className="space-y-1">
+                      <Label htmlFor="email">Email Address</Label>
+                      <div className="relative">
+                        <MailIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                        <Input 
+                          id="email"
+                          type="email" 
+                          placeholder="you@example.com" 
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="pl-9"
+                        />
+                      </div>
+                    </div>
                   </div>
+
+                  <Button 
+                    className="w-full"
+                    onClick={handleEmailSubmit}
+                  >
+                    View Plans & Pricing
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                  
+                  <p className="text-xs text-center text-muted-foreground">
+                    By continuing, you agree to our Terms of Service and Privacy Policy.
+                  </p>
                 </div>
-              </div>
-
-              <Button 
-                className="w-full"
-                onClick={handleCompanySubmit}
-              >
-                Continue
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              )}
             </div>
-          )}
 
-          {stage === 'preview' && (
-            <div className="space-y-4 animate-scale-in">
-              <p className="text-center text-xs text-muted-foreground">
-                Based on your information, here's a preview of your potential dashboard:
-              </p>
-              
-              <DashboardPreview />
-              
-              <div className="flex justify-center">
-                <Button 
-                  onClick={handleNextStage}
-                  className="group"
-                  size="sm"
-                >
-                  Continue
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </div>
+            {/* Right column - Dashboard Preview */}
+            <div className="hidden md:block">
+              <DashboardPreview className="h-full" />
             </div>
-          )}
-
-          {stage === 'email' && (
-            <div className="space-y-4 animate-scale-in">
-              <div className="space-y-3">
-                <p className="text-center text-sm">
-                  To receive your personalized plan and pricing:
-                </p>
-                
-                <div className="space-y-1">
-                  <Label htmlFor="email">Email Address</Label>
-                  <div className="relative">
-                    <MailIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                    <Input 
-                      id="email"
-                      type="email" 
-                      placeholder="you@example.com" 
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="pl-9"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <Button 
-                className="w-full"
-                onClick={handleEmailSubmit}
-              >
-                View Plans & Pricing
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-              
-              <p className="text-xs text-center text-muted-foreground">
-                By continuing, you agree to our Terms of Service and Privacy Policy.
-              </p>
-            </div>
-          )}
+          </div>
         </div>
 
         {/* Navigation buttons */}
-        <div className="flex justify-between items-center w-full max-w-md mt-4">
+        <div className="flex justify-between items-center w-full mt-4">
           <Button
             variant="ghost"
             size="sm"

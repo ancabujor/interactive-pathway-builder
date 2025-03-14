@@ -96,7 +96,7 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className="w-full mx-auto">
       <CardHeader className="py-3">
         <CardTitle className="text-lg font-medium text-center">Check Availability</CardTitle>
       </CardHeader>
@@ -105,7 +105,7 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
           {!showWaitlist ? (
             <>
               <div className="space-y-1">
-                <Label htmlFor="location">Your Location</Label>
+                <Label htmlFor="location">Where are your clients located?</Label>
                 <div className="relative">
                   <Select 
                     value={location} 
@@ -114,7 +114,7 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
                     <SelectTrigger id="location" className="w-full">
                       <div className="flex items-center">
                         <Globe className="mr-2 h-4 w-4 text-muted-foreground" />
-                        <SelectValue placeholder="Select your country" />
+                        <SelectValue placeholder="Select client location" />
                       </div>
                     </SelectTrigger>
                     <SelectContent>
