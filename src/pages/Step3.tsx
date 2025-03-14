@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
@@ -8,16 +9,19 @@ import CalculatorSection from '@/components/step3/CalculatorSection';
 import WhiteGloveServiceCard from '@/components/step3/WhiteGloveServiceCard';
 import TrustBuilders from '@/components/step3/TrustBuilders';
 import Step3Navigation from '@/components/step3/Step3Navigation';
+
 const Step3 = () => {
   const navigate = useNavigate();
   const {
     setCurrentStep,
     resetUserData
   } = useUserContext();
+
   const handlePreviousPage = () => {
     setCurrentStep(2);
     navigate('/step2');
   };
+
   const handleConsultationRequest = () => {
     toast.success('Consultation request received! We\'ll be in touch shortly.');
     setTimeout(() => {
@@ -25,6 +29,7 @@ const Step3 = () => {
       navigate('/step1');
     }, 3000);
   };
+
   const handleSelectPlan = () => {
     toast.success('Thank you for your selection! Your account is being set up.');
     setTimeout(() => {
@@ -32,11 +37,13 @@ const Step3 = () => {
       navigate('/step1');
     }, 3000);
   };
+
   const handleRequestDemo = () => {
     toast.success('We\'ll be in touch soon!');
     resetUserData();
     navigate('/step1');
   };
+
   return <div className="h-screen flex flex-col overflow-hidden bg-secondary/30">
       {/* Header with progress indicator */}
       <Step3Header />
@@ -45,13 +52,15 @@ const Step3 = () => {
         {/* Main content */}
         <div className="flex-1 flex flex-col px-4 pb-3">
           <div className="flex-1 grid md:grid-cols-2 gap-4">
-            {/* Calculator section */}
-            <div className="md:col-span-1">
+            {/* Calculator section - centered */}
+            <div className="md:col-span-1 flex justify-center">
               <CalculatorSection onSelectPlan={handleSelectPlan} />
             </div>
 
-            {/* White Glove Service */}
-            
+            {/* White Glove Service - centered */}
+            <div className="md:col-span-1 flex justify-center">
+              <WhiteGloveServiceCard onRequestConsultation={handleConsultationRequest} />
+            </div>
           </div>
 
           {/* Trust builders */}
@@ -65,4 +74,5 @@ const Step3 = () => {
       <SimpleFooter />
     </div>;
 };
+
 export default Step3;
