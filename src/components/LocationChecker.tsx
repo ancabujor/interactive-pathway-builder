@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
-import { GeoAlt, ArrowRight } from 'lucide-react';
+import { MapPin, ArrowRight } from 'lucide-react';
 
 // Qualified locations (would come from API in a real application)
 const QUALIFIED_LOCATIONS = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose'];
@@ -60,7 +60,7 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
           <div className="space-y-2">
             <Label htmlFor="location">Your Location</Label>
             <div className="relative">
-              <GeoAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+              <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
               <Input 
                 id="location"
                 placeholder="City, State, or Country" 
