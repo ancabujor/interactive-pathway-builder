@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
@@ -90,7 +91,7 @@ const Step2 = () => {
             {/* Left column - Form */}
             <div className="flex flex-col space-y-4 overflow-y-auto">
               {stage === 'location' && (
-                <LocationChecker onQualified={() => {}} />
+                <LocationChecker onQualified={handleNextStage} />
               )}
 
               {stage === 'email' && (
@@ -120,16 +121,6 @@ const Step2 = () => {
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back
           </Button>
-
-          {stage === 'location' && userData.location && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleNextStage}
-            >
-              Continue
-            </Button>
-          )}
         </div>
       </main>
 
