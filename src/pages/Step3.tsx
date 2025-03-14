@@ -38,12 +38,6 @@ const Step3 = () => {
     }, 3000);
   };
 
-  const handleRequestDemo = () => {
-    toast.success('We\'ll be in touch soon!');
-    resetUserData();
-    navigate('/step1');
-  };
-
   return <div className="h-screen flex flex-col overflow-hidden bg-secondary/30">
       {/* Header with progress indicator */}
       <Step3Header />
@@ -54,7 +48,10 @@ const Step3 = () => {
           <div className="w-full max-w-[60%] mx-auto">
             {/* Calculator section - centered */}
             <div className="w-full">
-              <CalculatorSection onSelectPlan={handleSelectPlan} />
+              <CalculatorSection 
+                onSelectPlan={handleSelectPlan} 
+                onRequestConsultation={handleConsultationRequest} 
+              />
             </div>
 
             {/* White Glove Service - centered */}
@@ -68,7 +65,7 @@ const Step3 = () => {
         </div>
 
         {/* Navigation buttons */}
-        <Step3Navigation onPreviousPage={handlePreviousPage} onRequestDemo={handleRequestDemo} />
+        <Step3Navigation onPreviousPage={handlePreviousPage} />
       </main>
 
       <SimpleFooter />
