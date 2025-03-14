@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useUserContext } from '@/context/UserContext';
 import { 
@@ -27,8 +26,7 @@ const clientOptions = [
   { value: "3", label: "3 Receptionists", cost: 75 },
   { value: "4", label: "4 Receptionists", cost: 65 },
   { value: "5", label: "5 Receptionists", cost: 55 },
-  { value: "10", label: "10 Receptionists", cost: 50 },
-  { value: "50", label: "50+ Receptionists (Enterprise)", cost: 50 },
+  { value: "6", label: "6+ Receptionists", cost: 50 },
 ];
 
 interface PlanSelectorProps {

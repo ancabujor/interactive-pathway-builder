@@ -19,8 +19,8 @@ const CalculatorSection: React.FC<CalculatorSectionProps> = ({ onSelectPlan, onR
     const count = userData.clientCount || 2;
     if (count <= 2) {
       return "Start with 2 Receptionists";
-    } else if (count >= 50) {
-      return "Get Enterprise Quote";
+    } else if (count >= 6) {
+      return "Start with 6+ Receptionists";
     } else {
       return `Start with ${count} Receptionists`;
     }
