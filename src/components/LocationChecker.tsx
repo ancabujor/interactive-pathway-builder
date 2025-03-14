@@ -42,6 +42,10 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
   const [emailError, setEmailError] = useState('');
 
   const handleReadyClick = () => {
+    if (!location) {
+      toast.error('Please select your location first');
+      return;
+    }
     setShowEmailField(true);
   };
 
@@ -90,12 +94,16 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
           />
 
           {!showWaitlist ? (
-            <CompanyDetailsForm 
-              companyName={companyName}
-              clientCount={clientCount}
-              onCompanyNameChange={handleCompanyNameChange}
-              onClientCountChange={handleClientCountChange}
-            />
+            <>
+              {location && (
+                <CompanyDetailsForm 
+                  companyName={companyName}
+                  clientCount={clientCount}
+                  onCompanyNameChange={handleCompanyNameChange}
+                  onClientCountChange={handleClientCountChange}
+                />
+              )}
+            </>
           ) : (
             <WaitlistForm 
               waitlistEmail={waitlistEmail}
@@ -110,11 +118,12 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
               onClick={handleReadyClick} 
               className="w-full mt-2"
               variant="default"
+              disabled={!location}
             >
               I'm ready to start my AI business <ArrowRight className="ml-2" />
             </Button>
           ) : (
-            <Collapsible open={true} className="mt-4">
+            <Collapsible open={true} className="mt-3">
               <CollapsibleContent className="mt-3 space-y-2">
                 <div className="bg-muted/50 p-2 rounded text-sm">
                   <p className="font-medium">Awesome! One last thing...</p>
