@@ -55,7 +55,7 @@ const Step1 = () => {
           <section className="col-span-2 bg-background rounded-lg shadow-sm border p-2 flex flex-col">
             <div className="flex items-center justify-center space-x-1 mb-1">
               <Monitor className="h-4 w-4 text-primary" />
-              <h2 className="text-sm font-semibold">Reseller Dashboard</h2>
+              <h2 className="text-sm font-semibold">Your Branded Reseller Command Center</h2>
             </div>
             <div className="flex-1 overflow-hidden">
               <DashboardPreview className="h-full" />
