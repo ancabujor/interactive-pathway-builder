@@ -16,16 +16,11 @@ type CalculatorOutputs = {
 
 // Function to determine cost per client based on volume
 const getFixedCostPerClient = (clientCount: number): number => {
-  if (clientCount < 2) return 97; // Minimum 2 clients, but handling edge case
-  if (clientCount === 2) return 97;
+  if (clientCount <= 2) return 97;
   if (clientCount === 3) return 75;
   if (clientCount === 4) return 65;
   if (clientCount === 5) return 55;
-  if (clientCount >= 10) return 50;
-  
-  // For client counts between 6-9, we'll interpolate between $55 and $50
-  const ratio = (clientCount - 5) / 5; // How far between 5 and 10
-  return 55 - (ratio * 5); // Gradually reduce from 55 to 50
+  return 50; // 6+ clients
 };
 
 export const useCalculator = (initialValues?: Partial<CalculatorInputs>) => {
