@@ -73,6 +73,14 @@ const Calculator: React.FC<CalculatorProps> = ({
               />
             </div>
           </div>
+          
+          {inputs.clientCount === 50 && (
+            <div className="mt-2 text-center">
+              <p className="text-sm font-medium text-primary animate-pulse">
+                Unlimited clients, unlimited profits
+              </p>
+            </div>
+          )}
         </div>
 
         <div className="pt-3 border-t mt-3">
