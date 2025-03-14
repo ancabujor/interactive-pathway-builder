@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,6 +12,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible';
 import { useUserContext } from '@/context/UserContext';
+import { toast } from 'sonner';
 
 interface LocationCheckerProps {
   onQualified: () => void;
@@ -67,7 +67,6 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
 
   const handleSubmitEmail = () => {
     if (readyEmail && validateEmail(readyEmail)) {
-      // Update user email and navigate to step 3
       setWaitlistEmail(readyEmail);
       setCurrentStep(3);
       navigate('/step3');
