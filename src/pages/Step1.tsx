@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Calculator from '@/components/Calculator';
 import DashboardPreview from '@/components/DashboardPreview';
-import { ArrowRight, ChevronRight, Monitor, DollarSign, Plus, Minus } from 'lucide-react';
+import { ArrowRight, ChevronRight, Monitor, DollarSign, Plus, Minus, RepeatIcon, Tag, TrendingUp } from 'lucide-react';
 
 const Step1 = () => {
   const navigate = useNavigate();
@@ -104,6 +104,40 @@ const Step1 = () => {
             </div>
           </section>
         </div>
+        
+        {/* Value Propositions Section */}
+        <section className="bg-background border-t py-2">
+          <div className="container mx-auto">
+            <div className="grid grid-cols-3 gap-4">
+              {/* Recurring Revenue */}
+              <div className="flex flex-col items-center text-center">
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mb-1">
+                  <RepeatIcon className="h-4 w-4 text-primary" />
+                </div>
+                <h3 className="text-xs font-semibold mb-1">Recurring Revenue</h3>
+                <p className="text-xs text-muted-foreground">Monthly subscription model creates predictable cash flow</p>
+              </div>
+              
+              {/* White-Label Solution */}
+              <div className="flex flex-col items-center text-center">
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mb-1">
+                  <Tag className="h-4 w-4 text-primary" />
+                </div>
+                <h3 className="text-xs font-semibold mb-1">White-Label Solution</h3>
+                <p className="text-xs text-muted-foreground">Your clients never see our branding—only yours</p>
+              </div>
+              
+              {/* Scalable Margins */}
+              <div className="flex flex-col items-center text-center">
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mb-1">
+                  <TrendingUp className="h-4 w-4 text-primary" />
+                </div>
+                <h3 className="text-xs font-semibold mb-1">Scalable Margins</h3>
+                <p className="text-xs text-muted-foreground">The more clients you add, the higher your profits</p>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer className="border-t py-1 px-4 flex justify-between items-center">
