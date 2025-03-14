@@ -1,10 +1,12 @@
+
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { 
   Users, Phone, Calculator, DollarSign, 
   Plus, Settings, LogOut, BookOpen, 
-  Globe, FileText, Box, LifeBuoy
+  Globe, FileText, Box, LifeBuoy, 
+  File, User, Package, Briefcase, Building
 } from 'lucide-react';
 
 interface DashboardContentProps {
@@ -22,6 +24,26 @@ const DashboardContent: React.FC<DashboardContentProps> = ({ userData }) => {
   
   // Calculate remaining available client slots (out of 5)
   const remainingSlots = 5 - Math.min(clientCount, 5);
+  
+  // Generic client titles with icons to use for the cards
+  const clientTypes = [
+    { title: "Primary Client", icon: <User className="h-4 w-4 text-blue-600" /> },
+    { title: "Business Account", icon: <Building className="h-4 w-4 text-green-600" /> },
+    { title: "Service Client", icon: <Package className="h-4 w-4 text-purple-600" /> },
+    { title: "Project Account", icon: <File className="h-4 w-4 text-orange-600" /> },
+    { title: "Partner Client", icon: <Briefcase className="h-4 w-4 text-red-600" /> },
+  ];
+  
+  // Generate array of client data based on client count
+  const generateClients = () => {
+    return Array.from({ length: Math.min(clientCount, 5) }, (_, index) => ({
+      name: `${companyName} ${index > 0 ? (index + 1) : ''}`,
+      type: clientTypes[index % clientTypes.length],
+      location: location
+    }));
+  };
+  
+  const clients = generateClients();
   
   return (
     <div className="flex h-full w-full overflow-hidden bg-white shadow-sm rounded-lg border">
@@ -157,13 +179,21 @@ const DashboardContent: React.FC<DashboardContentProps> = ({ userData }) => {
             
             {clientCount > 0 && (
               <div className="bg-gray-50 rounded-md p-2 md:p-4 max-w-xs">
-                {Array.from({ length: Math.min(clientCount, 1) }).map((_, index) => (
-                  <div key={index} className="flex justify-between items-center mb-2 last:mb-0">
-                    <div>
-                      <h3 className="font-bold text-xs md:text-sm">{companyName || "Client " + (index + 1)}</h3>
-                      <div className="text-xs text-gray-500">{location || "Location"}</div>
+                {clients.map((client, index) => (
+                  <div key={index} className="flex justify-between items-center mb-2 last:mb-0 client-card-enter">
+                    <div className="flex items-center">
+                      <div className="mr-2">
+                        {client.type.icon}
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-xs md:text-sm">{client.name}</h3>
+                        <div className="text-xs text-gray-500 flex items-center">
+                          <Globe className="h-3 w-3 mr-1" />
+                          <span>{client.location}</span>
+                        </div>
+                      </div>
                     </div>
-                    <Settings className="h-4 w-4 text-gray-400" />
+                    <Settings className="h-4 w-4 text-gray-400 cursor-pointer hover:text-gray-600" />
                   </div>
                 ))}
               </div>
