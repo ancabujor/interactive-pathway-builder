@@ -97,7 +97,7 @@ const Step1 = () => {
           <section className="col-span-1 bg-background rounded-lg shadow-sm border p-2 flex flex-col overflow-hidden">
             <div className="flex items-center justify-center space-x-1 mb-1">
               <DollarSign className="h-4 w-4 text-primary" />
-              <h2 className="text-sm font-semibold">Profit Calculator</h2>
+              <h2 className="text-sm font-semibold">Your Revenue Projection Tool</h2>
             </div>
             <div className="flex-1 overflow-hidden">
               <Calculator />
