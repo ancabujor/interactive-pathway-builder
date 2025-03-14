@@ -63,7 +63,7 @@ const Step1 = () => {
             </div>
           </section>
 
-          <section className="col-span-1 bg-background rounded-lg shadow-sm border p-2 flex flex-col">
+          <section className="col-span-1 bg-background rounded-lg shadow-sm border-2 border-blue-400 p-2 flex flex-col bg-blue-50/50">
             <div className="flex items-center justify-center space-x-1 mb-1">
               <DollarSign className="h-4 w-4 text-primary" />
               <h2 className="text-sm font-semibold">Your Revenue Projection Tool</h2>
