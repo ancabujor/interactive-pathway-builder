@@ -11,7 +11,7 @@ const Step3Header: React.FC = () => {
       <ProgressIndicator currentStep={currentStep} />
       <section className="text-center pt-3 pb-2">
         <h1 className="text-xl font-bold tracking-tight">
-          Select Your Reseller Plan
+          Launch Your AI Receptionist Business
         </h1>
         <p className="text-xs text-muted-foreground">
           Choose the option that best fits your business needs.
