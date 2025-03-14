@@ -83,28 +83,28 @@ const DashboardContent: React.FC<DashboardContentProps> = ({ userData }) => {
               {/* Branding Configuration section */}
               <div className="hidden md:block">
                 <div className="flex items-center text-gray-700 px-3 py-2 my-1 font-medium">
-                  <span>Branding</span>
+                  <span>Style Editor</span>
                 </div>
                 
                 <div className="pl-3">
                   <div className="flex items-center text-gray-700 px-3 py-1 rounded-md my-1 hover:bg-gray-100">
                     <Palette className="h-4 w-4 mr-2 text-purple-500" />
-                    <span className="text-sm">Colors</span>
+                    <span className="text-sm">Theme</span>
                   </div>
                   
                   <div className="flex items-center text-gray-700 px-3 py-1 rounded-md my-1 hover:bg-gray-100">
                     <Type className="h-4 w-4 mr-2 text-blue-500" />
-                    <span className="text-sm">Typography</span>
+                    <span className="text-sm">Fonts</span>
                   </div>
                   
                   <div className="flex items-center text-gray-700 px-3 py-1 rounded-md my-1 hover:bg-gray-100">
                     <Image className="h-4 w-4 mr-2 text-green-500" />
-                    <span className="text-sm">Logo</span>
+                    <span className="text-sm">Images</span>
                   </div>
                   
                   <div className="flex items-center text-gray-700 px-3 py-1 rounded-md my-1 hover:bg-gray-100">
                     <LayoutTemplate className="h-4 w-4 mr-2 text-orange-500" />
-                    <span className="text-sm">Layout</span>
+                    <span className="text-sm">Templates</span>
                   </div>
                 </div>
               </div>
