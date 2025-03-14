@@ -90,6 +90,10 @@
     @apply border-border;
   }
 
+  html, body, #root {
+    @apply h-full w-full overflow-hidden;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
@@ -119,10 +123,10 @@
   }
   
   .page-transition-container {
-    @apply min-h-screen w-full relative overflow-hidden;
+    @apply w-full h-full relative overflow-hidden;
   }
   
   .page-content {
-    @apply w-full min-h-screen absolute;
+    @apply w-full h-full absolute;
   }
 }

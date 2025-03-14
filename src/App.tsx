@@ -19,7 +19,7 @@ const App = () => (
     <TooltipProvider>
       <UserProvider>
         <BrowserRouter>
-          <div className="h-screen overflow-hidden flex flex-col">
+          <div className="h-screen w-screen overflow-hidden flex flex-col">
             <Toaster />
             <Sonner />
             <Routes>

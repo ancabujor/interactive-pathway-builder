@@ -19,8 +19,8 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children, className }) 
   }, [location, displayLocation]);
 
   return (
-    <div className={cn('page-transition-container', className)}>
-      <div className="page-content">
+    <div className={cn('page-transition-container max-h-screen', className)}>
+      <div className="page-content max-h-screen">
         {children}
       </div>
     </div>
