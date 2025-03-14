@@ -19,7 +19,7 @@ export const clientTypes: ClientType[] = [
   { title: "Business Account", icon: <Building className="h-4 w-4 text-green-600" /> },
   { title: "Service Client", icon: <Package className="h-4 w-4 text-purple-600" /> },
   { title: "Project Account", icon: <File className="h-4 w-4 text-orange-600" /> },
-  { title: "Partner Client", icon: <Briefcase className="h-4 w-4 text-red-600" /> },
+  { title: "Partner Client", icon: <Briefcase className="h-4 w-4 text-red-600" /> }
 ];
 
 // Generate array of client data based on client count
