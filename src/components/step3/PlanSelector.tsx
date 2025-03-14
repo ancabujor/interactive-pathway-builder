@@ -59,11 +59,14 @@ const PlanSelector: React.FC<PlanSelectorProps> = ({
   useEffect(() => {
     if (initialClientCount) {
       handleClientCountChange(initialClientCount.toString());
+    } else {
+      // Default to 2 if no initialClientCount provided
+      handleClientCountChange("2");
     }
   }, [initialClientCount]);
   
   // Get current values based on client count
-  const clientCount = userData.clientCount || initialClientCount;
+  const clientCount = userData.clientCount || 2; // Default to 2 if not set
   const costPerClient = getFixedCostPerClient(clientCount);
   const profit = clientCount * (pricePerClient - costPerClient);
   const monthlyInvestment = clientCount * costPerClient;
@@ -78,6 +81,7 @@ const PlanSelector: React.FC<PlanSelectorProps> = ({
             <Select 
               defaultValue={clientCount.toString()}
               onValueChange={handleClientCountChange}
+              value={clientCount.toString()} // Ensure a value is always selected
             >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select number of receptionists" />
