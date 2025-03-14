@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
-import { Check, PhoneCall } from 'lucide-react';
+import { Check, PhoneCall, Rocket } from 'lucide-react';
 
 interface WhiteGloveServiceCardProps {
   onRequestConsultation: () => void;
@@ -15,7 +15,7 @@ const WhiteGloveServiceCard: React.FC<WhiteGloveServiceCardProps> = ({ onRequest
         <div className="px-2 py-0.5 bg-primary/10 text-primary text-xs font-medium w-fit rounded-full mb-1">
           Premium Support
         </div>
-        <CardTitle className="text-base">White Glove Service</CardTitle>
+        <CardTitle className="text-base">Launch Your AI Receptionist Business</CardTitle>
         <CardDescription className="text-xs">
           Personalized onboarding and implementation support
         </CardDescription>
