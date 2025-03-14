@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,7 +13,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible';
 import { useUserContext } from '@/context/UserContext';
-import { toast } from 'sonner';
 
 interface LocationCheckerProps {
   onQualified: () => void;
@@ -43,7 +43,7 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
 
   const handleReadyClick = () => {
     if (!location) {
-      toast.error('Please select your location first');
+      // Just focus on the location field if empty instead of showing toast
       return;
     }
     setShowEmailField(true);

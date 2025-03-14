@@ -1,7 +1,6 @@
 
 import { useState } from 'react';
 import { useUserContext } from '@/context/UserContext';
-import { toast } from 'sonner';
 import { QUALIFIED_LOCATIONS } from '@/components/location/LocationSelector';
 
 interface UseLocationCheckerProps {
@@ -35,7 +34,6 @@ export function useLocationChecker({ onQualified }: UseLocationCheckerProps) {
 
   const checkLocation = (selectedLocation: string) => {
     if (!selectedLocation) {
-      toast.error('Please select your location');
       return;
     }
     
@@ -51,10 +49,7 @@ export function useLocationChecker({ onQualified }: UseLocationCheckerProps) {
       });
       
       if (isQualified) {
-        toast.success('Your location qualifies for our white-label program!');
         onQualified();
-      } else if (selectedLocation !== 'Not listed') {
-        toast.info('Your location is currently on our waitlist');
       }
       
       setLoading(false);
@@ -63,13 +58,11 @@ export function useLocationChecker({ onQualified }: UseLocationCheckerProps) {
 
   const submitWaitlist = () => {
     if (!waitlistEmail.trim()) {
-      toast.error('Please enter your email');
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(waitlistEmail)) {
-      toast.error('Please enter a valid email address');
       return;
     }
 
@@ -80,7 +73,6 @@ export function useLocationChecker({ onQualified }: UseLocationCheckerProps) {
       updateUserData({ 
         email: waitlistEmail
       });
-      toast.success("You've been added to our waitlist!");
       setLoading(false);
     }, 500);
   };
