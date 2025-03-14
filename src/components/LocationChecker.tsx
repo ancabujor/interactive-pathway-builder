@@ -51,13 +51,13 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto hover-scale">
-      <CardHeader className="space-y-1 pb-4">
-        <CardTitle className="text-xl font-medium text-center">Check Availability</CardTitle>
+    <Card className="w-full max-w-md mx-auto">
+      <CardHeader className="py-3">
+        <CardTitle className="text-lg font-medium text-center">Check Availability</CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          <div className="space-y-2">
+      <CardContent className="py-2">
+        <div className="space-y-2">
+          <div className="space-y-1">
             <Label htmlFor="location">Your Location</Label>
             <div className="relative">
               <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
@@ -72,20 +72,21 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
           </div>
           
           {userData.isQualified === false && userData.location && (
-            <div className="text-sm p-3 bg-muted rounded-md">
+            <div className="text-xs p-2 bg-muted rounded-md">
               <p className="font-medium">Your location is on our waitlist</p>
-              <p className="text-muted-foreground mt-1">
-                We're expanding rapidly and will notify you when we're available in your area.
+              <p className="text-muted-foreground mt-0.5">
+                We'll notify you when we're available in your area.
               </p>
             </div>
           )}
         </div>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="py-2">
         <Button 
           className="w-full"
           onClick={checkLocation}
           disabled={loading}
+          size="sm"
         >
           {loading ? (
             <span className="inline-flex items-center">

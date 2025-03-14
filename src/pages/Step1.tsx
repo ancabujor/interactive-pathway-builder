@@ -19,104 +19,94 @@ const Step1 = () => {
   };
 
   return (
-    <PageTransition>
-      <div className="min-h-screen bg-secondary/30 flex flex-col">
-        {/* Progress indicator */}
-        <header className="w-full max-w-7xl mx-auto px-4 py-6">
-          <div className="flex justify-center items-center space-x-4 sm:space-x-8">
-            <div className="flex flex-col items-center">
-              <div className="step-indicator active">1</div>
-              <span className="text-xs mt-1 text-center">Demo</span>
-            </div>
-            <div className="w-12 h-px bg-muted-foreground/30" />
-            <div className="flex flex-col items-center">
-              <div className="step-indicator">2</div>
-              <span className="text-xs mt-1 text-center">Assessment</span>
-            </div>
-            <div className="w-12 h-px bg-muted-foreground/30" />
-            <div className="flex flex-col items-center">
-              <div className="step-indicator">3</div>
-              <span className="text-xs mt-1 text-center">Selection</span>
-            </div>
+    <div className="h-screen flex flex-col overflow-hidden bg-secondary/30">
+      {/* Progress indicator */}
+      <header className="w-full py-3 border-b">
+        <div className="flex justify-center items-center space-x-4 sm:space-x-8">
+          <div className="flex flex-col items-center">
+            <div className="step-indicator active">1</div>
+            <span className="text-xs mt-1 text-center">Demo</span>
           </div>
-        </header>
+          <div className="w-12 h-px bg-muted-foreground/30" />
+          <div className="flex flex-col items-center">
+            <div className="step-indicator">2</div>
+            <span className="text-xs mt-1 text-center">Assessment</span>
+          </div>
+          <div className="w-12 h-px bg-muted-foreground/30" />
+          <div className="flex flex-col items-center">
+            <div className="step-indicator">3</div>
+            <span className="text-xs mt-1 text-center">Selection</span>
+          </div>
+        </div>
+      </header>
 
-        <main className="flex-1 w-full max-w-6xl mx-auto px-4 py-8 space-y-12 fade-in-stagger">
+      <main className="flex-1 overflow-hidden flex flex-col">
+        <div className="grid grid-cols-3 h-full">
           {/* Hero section */}
-          <section className="text-center max-w-3xl mx-auto">
-            <div className="inline-block px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary mb-4">
+          <section className="col-span-3 flex flex-col justify-center items-center p-4 bg-gradient-to-r from-primary/5 to-primary/10">
+            <div className="inline-block px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary mb-2">
               White-Label AI Receptionist
             </div>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
-              Grow Your Business with<br />Our White-Label Solution
+            <h1 className="text-3xl font-bold tracking-tight mb-2 text-center">
+              Grow Your Business with Our White-Label Solution
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Offer cutting-edge AI receptionist services to your clients under your own brand. Increase your revenue without the overhead.
+            <p className="text-sm text-muted-foreground max-w-md text-center mb-4">
+              Offer cutting-edge AI receptionist services under your own brand.
             </p>
-          </section>
-
-          {/* Calculator section */}
-          <section className="space-y-6">
-            <div className="flex items-center justify-center space-x-2 mb-6">
-              <DollarSign className="h-5 w-5 text-primary" />
-              <h2 className="text-2xl font-semibold text-center">Calculate Your Potential Profit</h2>
-            </div>
-            <Calculator />
-          </section>
-
-          {/* Dashboard preview section */}
-          <section className="space-y-6">
-            <div className="flex items-center justify-center space-x-2 mb-6">
-              <Monitor className="h-5 w-5 text-primary" />
-              <h2 className="text-2xl font-semibold text-center">Reseller Dashboard Preview</h2>
-            </div>
-            <DashboardPreview />
-          </section>
-
-          {/* Client view section */}
-          <section className="space-y-6">
-            <div className="flex items-center justify-center space-x-2 mb-6">
-              <Users className="h-5 w-5 text-primary" />
-              <h2 className="text-2xl font-semibold text-center">White-Label Client Experience</h2>
-            </div>
-            <Card className="p-6 w-full max-w-2xl mx-auto bg-muted/50 border-dashed hover-scale">
-              <div className="text-center">
-                <p className="text-muted-foreground mb-4">Screenshot preview of the client interface</p>
-                <div className="w-full h-64 bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground text-sm">Client interface placeholder</p>
-                </div>
-              </div>
-            </Card>
-          </section>
-
-          {/* CTA section */}
-          <section className="mt-16 text-center">
             <Button 
-              size="lg" 
               onClick={handleNextStep}
-              className="animate-pulse-subtle hover:animate-none group"
+              className="group"
             >
-              Continue to Assessment
+              Start Assessment
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <p className="mt-4 text-sm text-muted-foreground">
-              Check if your location qualifies for our white-label program.
-            </p>
           </section>
-        </main>
+          
+          <div className="col-span-3 grid grid-cols-3 gap-3 p-3">
+            {/* Calculator section */}
+            <section className="col-span-1 bg-background rounded-lg shadow-sm border p-3">
+              <div className="flex items-center justify-center space-x-1 mb-2">
+                <DollarSign className="h-4 w-4 text-primary" />
+                <h2 className="text-sm font-semibold">Profit Calculator</h2>
+              </div>
+              <Calculator />
+            </section>
 
-        <footer className="border-t py-6">
-          <div className="w-full max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <p className="text-sm text-muted-foreground">White-Label AI Receptionist Program</p>
-            <div className="flex items-center">
-              <a href="#" className="text-sm text-primary inline-flex items-center hover:underline">
-                Learn more <ChevronRight className="ml-1 h-3 w-3" />
-              </a>
-            </div>
+            {/* Dashboard preview section */}
+            <section className="col-span-1 bg-background rounded-lg shadow-sm border p-3">
+              <div className="flex items-center justify-center space-x-1 mb-2">
+                <Monitor className="h-4 w-4 text-primary" />
+                <h2 className="text-sm font-semibold">Reseller Dashboard</h2>
+              </div>
+              <DashboardPreview />
+            </section>
+
+            {/* Client view section */}
+            <section className="col-span-1 bg-background rounded-lg shadow-sm border p-3">
+              <div className="flex items-center justify-center space-x-1 mb-2">
+                <Users className="h-4 w-4 text-primary" />
+                <h2 className="text-sm font-semibold">Client Experience</h2>
+              </div>
+              <Card className="w-full bg-muted/50 border-dashed">
+                <div className="text-center p-3">
+                  <p className="text-xs text-muted-foreground mb-2">Client interface preview</p>
+                  <div className="w-full h-32 bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg flex items-center justify-center">
+                    <p className="text-muted-foreground text-xs">Client interface</p>
+                  </div>
+                </div>
+              </Card>
+            </section>
           </div>
-        </footer>
-      </div>
-    </PageTransition>
+        </div>
+      </main>
+
+      <footer className="border-t py-2 px-4 flex justify-between items-center">
+        <p className="text-xs text-muted-foreground">White-Label AI Receptionist Program</p>
+        <a href="#" className="text-xs text-primary inline-flex items-center hover:underline">
+          Learn more <ChevronRight className="ml-1 h-3 w-3" />
+        </a>
+      </footer>
+    </div>
   );
 };
 

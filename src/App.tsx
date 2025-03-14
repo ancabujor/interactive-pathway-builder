@@ -19,15 +19,17 @@ const App = () => (
     <TooltipProvider>
       <UserProvider>
         <BrowserRouter>
-          <Toaster />
-          <Sonner />
-          <Routes>
-            <Route path="/" element={<Navigate to="/step1" replace />} />
-            <Route path="/step1" element={<Step1 />} />
-            <Route path="/step2" element={<Step2 />} />
-            <Route path="/step3" element={<Step3 />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <div className="h-screen overflow-hidden flex flex-col">
+            <Toaster />
+            <Sonner />
+            <Routes>
+              <Route path="/" element={<Navigate to="/step1" replace />} />
+              <Route path="/step1" element={<Step1 />} />
+              <Route path="/step2" element={<Step2 />} />
+              <Route path="/step3" element={<Step3 />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
         </BrowserRouter>
       </UserProvider>
     </TooltipProvider>
