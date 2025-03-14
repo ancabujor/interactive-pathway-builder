@@ -11,29 +11,16 @@ interface PageTransitionProps {
 const PageTransition: React.FC<PageTransitionProps> = ({ children, className }) => {
   const location = useLocation();
   const [displayLocation, setDisplayLocation] = useState(location);
-  const [transitionStage, setTransitionStage] = useState('fadeIn');
 
   useEffect(() => {
     if (location.pathname !== displayLocation.pathname) {
-      setTransitionStage('fadeOut');
-      
-      const timeout = setTimeout(() => {
-        setTransitionStage('fadeIn');
-        setDisplayLocation(location);
-      }, 400); // Match this with the CSS animation duration
-      
-      return () => clearTimeout(timeout);
+      setDisplayLocation(location);
     }
   }, [location, displayLocation]);
 
   return (
     <div className={cn('page-transition-container', className)}>
-      <div
-        className={cn(
-          'page-content',
-          transitionStage === 'fadeIn' ? 'animate-fade-in' : 'animate-fade-out'
-        )}
-      >
+      <div className="page-content">
         {children}
       </div>
     </div>

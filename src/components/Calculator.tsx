@@ -30,7 +30,7 @@ const Calculator: React.FC<CalculatorProps> = ({
   }, [outputs.monthlyProfit, inputs.clientCount, updateUserData]);
 
   return (
-    <Card className="w-full h-full mx-auto overflow-hidden transition-all duration-300 flex flex-col">
+    <Card className="w-full h-full mx-auto overflow-hidden flex flex-col">
       <CardContent className="p-3 flex-1 flex flex-col justify-between">
         <div className="space-y-3">
           <div className="space-y-2">
