@@ -19,12 +19,12 @@ const DashboardPreview: React.FC<DashboardPreviewProps> = ({ className }) => {
 
   return (
     <Card className={`overflow-hidden w-full flex flex-col hover-scale ${className}`}>
-      <div className="bg-primary p-4 text-white">
+      <header className="bg-primary p-4 text-white">
         <div className="flex justify-between items-center">
           <h2 className="font-medium">{userData.companyName || 'Your Company'} Reseller Dashboard</h2>
           <span className="text-xs opacity-80">{today}</span>
         </div>
-      </div>
+      </header>
       <CardContent className="p-0 flex-1 flex flex-col">
         <div className="grid grid-cols-2 divide-x divide-y flex-shrink-0">
           <div className="p-4 flex flex-col">
