@@ -3,9 +3,8 @@ import React from 'react';
 import { useUserContext } from '@/context/UserContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
-import Calculator from '@/components/Calculator';
+import PricingCalculator from '@/components/PricingCalculator';
 import { ArrowRight, Users } from 'lucide-react';
-import { toast } from 'sonner';
 
 interface CalculatorSectionProps {
   onSelectPlan: () => void;
@@ -23,7 +22,7 @@ const CalculatorSection: React.FC<CalculatorSectionProps> = ({ onSelectPlan }) =
         </div>
       </CardHeader>
       <CardContent className="pt-0 pb-3 px-3 flex-1">
-        <Calculator initialClientCount={userData.clientCount || 5} />
+        <PricingCalculator initialClientCount={userData.clientCount || 5} />
       </CardContent>
       <CardFooter className="py-3 border-t">
         <Button 
