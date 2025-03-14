@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
@@ -46,7 +47,7 @@ const Step1 = () => {
           <h1 className="text-2xl font-bold tracking-tight mb-1 text-center">Build a Profitable AI Business Under Your Own Brand</h1>
           <p className="text-sm text-muted-foreground max-w-md text-center mb-2">Launch your own AI receptionist service with 262% ROI and zero development costs.</p>
           <Button onClick={handleNextStep} className="group" size="sm">
-            Start Assessment
+            Let's Build Your Business →
             <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
         </section>
