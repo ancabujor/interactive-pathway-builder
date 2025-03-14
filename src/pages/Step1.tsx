@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import Calculator from '@/components/Calculator';
 import DashboardPreview from '@/components/DashboardPreview';
 import TrustBuilders from '@/components/TrustBuilders';
@@ -75,7 +73,6 @@ const Step1 = () => {
           </section>
         </div>
         
-        {/* Trust Builders Section */}
         <TrustBuilders />
       </main>
 
