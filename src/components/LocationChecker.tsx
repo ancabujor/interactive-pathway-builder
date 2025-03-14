@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import LocationSelector from '@/components/location/LocationSelector';
 import CompanyDetailsForm from '@/components/company/CompanyDetailsForm';
@@ -10,13 +11,17 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Mail } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible';
+import { useUserContext } from '@/context/UserContext';
 
 interface LocationCheckerProps {
   onQualified: () => void;
 }
 
 const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
+  const navigate = useNavigate();
+  const { setCurrentStep } = useUserContext();
+  
   const {
     location,
     loading,
@@ -58,9 +63,10 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
 
   const handleSubmitEmail = () => {
     if (readyEmail && validateEmail(readyEmail)) {
-      // Update user email and continue
+      // Update user email and navigate to step 3
       setWaitlistEmail(readyEmail);
-      onQualified();
+      setCurrentStep(3);
+      navigate('/step3');
     } else if (readyEmail) {
       setEmailError('Please enter a valid email address');
     }
