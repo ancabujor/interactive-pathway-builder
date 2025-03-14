@@ -14,7 +14,7 @@ const Step3Header: React.FC = () => {
           Launch Your AI Receptionist Business
         </h1>
         <p className="text-xs text-muted-foreground">
-          Choose the option that best fits your business needs.
+          Start earning monthly with a plan tailored to your goals
         </p>
       </section>
     </>
