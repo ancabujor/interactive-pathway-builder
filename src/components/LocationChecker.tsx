@@ -34,16 +34,35 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
 
   const [showEmailField, setShowEmailField] = useState(false);
   const [readyEmail, setReadyEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
 
   const handleReadyClick = () => {
     setShowEmailField(true);
   };
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const email = e.target.value;
+    setReadyEmail(email);
+    
+    if (email && !validateEmail(email)) {
+      setEmailError('Please enter a valid email address');
+    } else {
+      setEmailError('');
+    }
+  };
+
   const handleSubmitEmail = () => {
-    if (readyEmail) {
+    if (readyEmail && validateEmail(readyEmail)) {
       // Update user email and continue
       setWaitlistEmail(readyEmail);
       onQualified();
+    } else if (readyEmail) {
+      setEmailError('Please enter a valid email address');
     }
   };
 
@@ -102,18 +121,21 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
                     id="ready-email"
                     placeholder="you@example.com" 
                     value={readyEmail}
-                    onChange={(e) => setReadyEmail(e.target.value)}
-                    className="pl-9"
+                    onChange={handleEmailChange}
+                    className={`pl-9 ${emailError ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
                     type="email"
                   />
                 </div>
+                {emailError && (
+                  <p className="text-xs text-red-500 mt-1">{emailError}</p>
+                )}
                 <Button 
                   onClick={handleSubmitEmail} 
                   className="w-full mt-2"
-                  disabled={!readyEmail}
+                  disabled={!readyEmail || !!emailError}
                   size="sm"
                 >
-                  Continue
+                  Start My AI Business <ArrowRight className="ml-1 w-3 h-3" />
                 </Button>
               </div>
             </CollapsibleContent>
