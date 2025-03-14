@@ -65,7 +65,7 @@ const Step1 = () => {
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center space-x-1">
                 <Monitor className="h-4 w-4 text-primary" />
-                <h2 className="text-sm font-semibold">Reseller Dashboard</h2>
+                <h2 className="text-sm font-semibold">Your Branded Reseller Command Center</h2>
               </div>
               <div className="flex space-x-1">
                 <Button 
