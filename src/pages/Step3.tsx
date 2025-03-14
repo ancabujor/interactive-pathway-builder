@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import Calculator from '@/components/Calculator';
 import { toast } from 'sonner';
 import { 
   ArrowLeft, 
@@ -16,7 +17,8 @@ import {
   DollarSign, 
   ChevronRight, 
   Clock,
-  Info 
+  Info,
+  Users
 } from 'lucide-react';
 
 const Step3 = () => {
@@ -79,95 +81,113 @@ const Step3 = () => {
 
         {/* Main content */}
         <div className="flex-1 flex flex-col px-4 pb-3">
-          <div className="flex-1 grid md:grid-cols-2 gap-4">
-            {/* Self-service plan */}
-            <Card className="border-2 border-primary/10 flex flex-col">
-              <CardHeader className="py-3">
-                <div className="px-2 py-0.5 bg-primary/10 text-primary text-xs font-medium w-fit rounded-full mb-1">
-                  Most Popular
-                </div>
-                <CardTitle className="text-base">Self-Service Plan</CardTitle>
-                <CardDescription className="text-xs">
-                  Get started quickly with our streamlined setup process
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="py-2 flex-1">
-                <div className="mb-3">
-                  <p className="text-xl font-bold">${(userData.calculatedProfit * 0.8).toFixed(0)}<span className="text-xs font-normal text-muted-foreground"> /mo</span></p>
-                  <p className="text-xs text-muted-foreground">Based on {userData.clientCount} clients</p>
-                </div>
-                
-                <ul className="space-y-1 text-xs">
-                  <li className="flex">
-                    <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
-                    <span>White-labeled client portal</span>
-                  </li>
-                  <li className="flex">
-                    <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
-                    <span>Automated client onboarding</span>
-                  </li>
-                  <li className="flex">
-                    <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
-                    <span>Email & chat support</span>
-                  </li>
-                </ul>
-              </CardContent>
-              <CardFooter className="py-3">
-                <Button 
-                  className="w-full"
-                  onClick={handleSelfServiceSelection}
-                  size="sm"
-                >
-                  Select Plan
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </CardFooter>
-            </Card>
+          <div className="flex-1 grid md:grid-cols-3 gap-4">
+            {/* Calculator section */}
+            <div className="md:col-span-1">
+              <Card className="h-full">
+                <CardHeader className="py-3">
+                  <div className="flex items-center justify-center space-x-1 mb-1">
+                    <Users className="h-4 w-4 text-primary" />
+                    <CardTitle className="text-sm font-semibold">How many clients would you like to start with?</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-0 pb-3 px-3 flex-1">
+                  <Calculator initialClientCount={userData.clientCount || 5} />
+                </CardContent>
+              </Card>
+            </div>
 
-            {/* Consultation plan */}
-            <Card className="flex flex-col">
-              <CardHeader className="py-3">
-                <div className="px-2 py-0.5 bg-secondary text-secondary-foreground text-xs font-medium w-fit rounded-full mb-1">
-                  Premium Support
-                </div>
-                <CardTitle className="text-base">Guided Implementation</CardTitle>
-                <CardDescription className="text-xs">
-                  Personalized onboarding and implementation support
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="py-2 flex-1">
-                <div className="mb-3">
-                  <p className="text-xl font-bold">Custom<span className="text-xs font-normal text-muted-foreground"> pricing</span></p>
-                  <p className="text-xs text-muted-foreground">Tailored to your business needs</p>
-                </div>
-                
-                <ul className="space-y-1 text-xs">
-                  <li className="flex">
-                    <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
-                    <span>Everything in Self-Service Plan</span>
-                  </li>
-                  <li className="flex">
-                    <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
-                    <span>Dedicated implementation manager</span>
-                  </li>
-                  <li className="flex">
-                    <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
-                    <span>Priority phone & email support</span>
-                  </li>
-                </ul>
-              </CardContent>
-              <CardFooter className="py-3">
-                <Button 
-                  variant="outline"
-                  className="w-full"
-                  onClick={handleConsultationRequest}
-                  size="sm"
-                >
-                  Request Consultation
-                  <PhoneCall className="ml-2 h-4 w-4" />
-                </Button>
-              </CardFooter>
-            </Card>
+            {/* Plan options */}
+            <div className="md:col-span-2 grid md:grid-cols-2 gap-4">
+              {/* Self-service plan */}
+              <Card className="border-2 border-primary/10 flex flex-col">
+                <CardHeader className="py-3">
+                  <div className="px-2 py-0.5 bg-primary/10 text-primary text-xs font-medium w-fit rounded-full mb-1">
+                    Most Popular
+                  </div>
+                  <CardTitle className="text-base">Self-Service Plan</CardTitle>
+                  <CardDescription className="text-xs">
+                    Get started quickly with our streamlined setup process
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="py-2 flex-1">
+                  <div className="mb-3">
+                    <p className="text-xl font-bold">${(userData.calculatedProfit * 0.8).toFixed(0)}<span className="text-xs font-normal text-muted-foreground"> /mo</span></p>
+                    <p className="text-xs text-muted-foreground">Based on {userData.clientCount} clients</p>
+                  </div>
+                  
+                  <ul className="space-y-1 text-xs">
+                    <li className="flex">
+                      <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
+                      <span>White-labeled client portal</span>
+                    </li>
+                    <li className="flex">
+                      <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
+                      <span>Automated client onboarding</span>
+                    </li>
+                    <li className="flex">
+                      <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
+                      <span>Email & chat support</span>
+                    </li>
+                  </ul>
+                </CardContent>
+                <CardFooter className="py-3">
+                  <Button 
+                    className="w-full"
+                    onClick={handleSelfServiceSelection}
+                    size="sm"
+                  >
+                    Select Plan
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </CardFooter>
+              </Card>
+
+              {/* Consultation plan */}
+              <Card className="flex flex-col">
+                <CardHeader className="py-3">
+                  <div className="px-2 py-0.5 bg-secondary text-secondary-foreground text-xs font-medium w-fit rounded-full mb-1">
+                    Premium Support
+                  </div>
+                  <CardTitle className="text-base">Guided Implementation</CardTitle>
+                  <CardDescription className="text-xs">
+                    Personalized onboarding and implementation support
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="py-2 flex-1">
+                  <div className="mb-3">
+                    <p className="text-xl font-bold">Custom<span className="text-xs font-normal text-muted-foreground"> pricing</span></p>
+                    <p className="text-xs text-muted-foreground">Tailored to your business needs</p>
+                  </div>
+                  
+                  <ul className="space-y-1 text-xs">
+                    <li className="flex">
+                      <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
+                      <span>Everything in Self-Service Plan</span>
+                    </li>
+                    <li className="flex">
+                      <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
+                      <span>Dedicated implementation manager</span>
+                    </li>
+                    <li className="flex">
+                      <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
+                      <span>Priority phone & email support</span>
+                    </li>
+                  </ul>
+                </CardContent>
+                <CardFooter className="py-3">
+                  <Button 
+                    variant="outline"
+                    className="w-full"
+                    onClick={handleConsultationRequest}
+                    size="sm"
+                  >
+                    Request Consultation
+                    <PhoneCall className="ml-2 h-4 w-4" />
+                  </Button>
+                </CardFooter>
+              </Card>
+            </div>
           </div>
 
           {/* Trust builders - simplified for single screen */}
