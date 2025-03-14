@@ -40,11 +40,13 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
       });
     } else {
       setShowWaitlist(false);
+      // Automatically check location when selection changes
+      checkLocation(value);
     }
   };
 
-  const checkLocation = () => {
-    if (!location) {
+  const checkLocation = (selectedLocation: string) => {
+    if (!selectedLocation) {
       toast.error('Please select your location');
       return;
     }
@@ -53,17 +55,17 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
     
     // Process qualified locations
     setTimeout(() => {
-      const isQualified = QUALIFIED_LOCATIONS.includes(location);
+      const isQualified = QUALIFIED_LOCATIONS.includes(selectedLocation);
       
       updateUserData({ 
-        location, 
+        location: selectedLocation, 
         isQualified 
       });
       
       if (isQualified) {
         toast.success('Your location qualifies for our white-label program!');
         onQualified();
-      } else if (location !== 'Not listed') {
+      } else if (selectedLocation !== 'Not listed') {
         toast.info('Your location is currently on our waitlist');
       }
       
@@ -166,24 +168,7 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
         </div>
       </CardContent>
       <CardFooter className="py-2">
-        {!showWaitlist ? (
-          <Button 
-            className="w-full"
-            onClick={checkLocation}
-            disabled={loading || !location}
-            size="sm"
-          >
-            {loading ? (
-              <span className="inline-flex items-center">
-                Checking... <span className="ml-2">⋯</span>
-              </span>
-            ) : (
-              <span className="inline-flex items-center">
-                Check Availability <ArrowRight className="ml-2 w-4 h-4" />
-              </span>
-            )}
-          </Button>
-        ) : (
+        {showWaitlist && (
           <Button 
             className="w-full"
             onClick={submitWaitlist}
