@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
@@ -5,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Calculator from '@/components/Calculator';
 import DashboardPreview from '@/components/DashboardPreview';
+import TrustBuilders from '@/components/TrustBuilders';
 import { ArrowRight, ChevronRight, Monitor, DollarSign } from 'lucide-react';
 
 const Step1 = () => {
@@ -72,6 +74,9 @@ const Step1 = () => {
             </div>
           </section>
         </div>
+        
+        {/* Trust Builders Section */}
+        <TrustBuilders />
       </main>
 
       <footer className="border-t py-2 px-4 flex justify-between items-center">

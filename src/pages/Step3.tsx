@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import SimpleFooter from '@/components/SimpleFooter';
 import Step3Header from '@/components/step3/Step3Header';
 import CalculatorSection from '@/components/step3/CalculatorSection';
-import TrustBuilders from '@/components/step3/TrustBuilders';
+import TrustBuilders from '@/components/TrustBuilders';
 import Step3Navigation from '@/components/step3/Step3Navigation';
 
 const Step3 = () => {

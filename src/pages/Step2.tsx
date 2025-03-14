@@ -8,6 +8,7 @@ import DashboardPreview from '@/components/DashboardPreview';
 import EmailForm from '@/components/EmailForm';
 import ProgressIndicator from '@/components/ProgressIndicator';
 import SimpleFooter from '@/components/SimpleFooter';
+import TrustBuilders from '@/components/TrustBuilders';
 import { ArrowLeft, AlertCircle } from 'lucide-react';
 
 const Step2 = () => {
@@ -109,6 +110,9 @@ const Step2 = () => {
             </div>
           </div>
         </div>
+
+        {/* Trust Builders Section */}
+        <TrustBuilders />
 
         {/* Navigation buttons */}
         <div className="flex justify-between items-center w-full mt-4">
