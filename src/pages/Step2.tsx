@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
@@ -17,14 +16,12 @@ const Step2 = () => {
   const [stage, setStage] = useState<'location' | 'email'>('location');
   const [email, setEmail] = useState(userData.email || '');
 
-  // Ensure the current step is set correctly when this component loads
   useEffect(() => {
     if (currentStep !== 2) {
       setCurrentStep(2);
     }
   }, []);
 
-  // Validate if we have the required information to continue
   useEffect(() => {
     if (!userData.location) {
       setStage('location');
@@ -61,7 +58,6 @@ const Step2 = () => {
     }
   };
 
-  // Helper function to get stage-specific description
   const getStageDescription = () => {
     switch(stage) {
       case 'location': return "Let's build your personalized AI business plan in just 60 seconds";
@@ -72,11 +68,9 @@ const Step2 = () => {
 
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-secondary/30">
-      {/* Progress indicator */}
       <ProgressIndicator currentStep={2} />
 
       <main className="flex-1 flex flex-col px-4 py-4 overflow-hidden">
-        {/* Page title */}
         <section className="text-center mb-4">
           <h1 className="text-xl font-bold tracking-tight mb-1">
             Your Custom Business Opportunity
@@ -86,10 +80,8 @@ const Step2 = () => {
           </p>
         </section>
 
-        {/* Two-column layout */}
         <div className="flex-1 overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
-            {/* Left column - Form */}
             <div className="flex flex-col space-y-4 overflow-y-auto">
               {stage === 'location' && (
                 <LocationChecker onQualified={handleNextStage} />
@@ -104,17 +96,14 @@ const Step2 = () => {
               )}
             </div>
 
-            {/* Right column - Complex Dashboard Preview */}
-            <div className="hidden md:block h-full">
-              <DashboardContent />
+            <div className="hidden md:block h-full overflow-hidden">
+              <DashboardContent userData={userData} />
             </div>
           </div>
         </div>
 
-        {/* Trust Builders Section */}
         <TrustBuilders />
 
-        {/* Navigation buttons */}
         <div className="flex justify-between items-center w-full mt-4">
           <Button
             variant="ghost"
