@@ -234,7 +234,7 @@ const Step2 = () => {
                 variant="outline"
                 size="sm"
                 onClick={() => {
-                  toast.success('You've been added to our waitlist');
+                  toast.success("You've been added to our waitlist");
                   updateUserData({ email: '' });
                 }}
               >
