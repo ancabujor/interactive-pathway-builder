@@ -63,7 +63,7 @@ const Step2 = () => {
   // Helper function to get stage-specific description
   const getStageDescription = () => {
     switch(stage) {
-      case 'location': return "Let's check if your location qualifies for our program.";
+      case 'location': return "Let's build your personalized AI business plan in just 60 seconds";
       case 'email': return "One last step - where should we send your personalized plan?";
       default: return "";
     }
