@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
 import { Button } from '@/components/ui/button';
 import LocationChecker from '@/components/LocationChecker';
-import DashboardPreview from '@/components/DashboardPreview';
+import DashboardContent from '@/components/DashboardContent';
 import EmailForm from '@/components/EmailForm';
 import ProgressIndicator from '@/components/ProgressIndicator';
 import SimpleFooter from '@/components/SimpleFooter';
@@ -104,9 +104,9 @@ const Step2 = () => {
               )}
             </div>
 
-            {/* Right column - Dashboard Preview */}
+            {/* Right column - Complex Dashboard Preview */}
             <div className="hidden md:block h-full">
-              <DashboardPreview />
+              <DashboardContent />
             </div>
           </div>
         </div>
