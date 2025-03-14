@@ -16,12 +16,14 @@ interface UserContextType {
   resetUserData: () => void;
   currentStep: number;
   setCurrentStep: (step: number) => void;
+  incrementClientCount: () => void;
+  decrementClientCount: () => void;
 }
 
 const defaultUserData: UserData = {
   location: '',
   companyName: '',
-  clientCount: 0,
+  clientCount: 1, // Start with 1 client by default
   email: '',
   calculatedProfit: 0,
   isQualified: false,
@@ -42,6 +44,24 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     setCurrentStep(1);
   };
 
+  const incrementClientCount = () => {
+    if (userData.clientCount < 5) {
+      setUserData(prev => ({ 
+        ...prev, 
+        clientCount: prev.clientCount + 1 
+      }));
+    }
+  };
+
+  const decrementClientCount = () => {
+    if (userData.clientCount > 0) {
+      setUserData(prev => ({ 
+        ...prev, 
+        clientCount: prev.clientCount - 1 
+      }));
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -50,6 +70,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         resetUserData,
         currentStep,
         setCurrentStep,
+        incrementClientCount,
+        decrementClientCount,
       }}
     >
       {children}
