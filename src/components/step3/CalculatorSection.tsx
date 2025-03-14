@@ -20,7 +20,7 @@ const CalculatorSection: React.FC<CalculatorSectionProps> = ({ onSelectPlan, onR
     if (count <= 2) {
       return "Start with 2 Receptionists";
     } else if (count >= 10) {
-      return "Start with 10+ Receptionists";
+      return "Start with 10 Receptionists";
     } else {
       return `Start with ${count} Receptionists`;
     }
