@@ -1,10 +1,10 @@
-
 import React from 'react';
 import { useCalculator } from '@/hooks/useCalculator';
 import { useUserContext } from '@/context/UserContext';
 import { Slider } from '@/components/ui/slider';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
+import { Infinity } from 'lucide-react';
 
 interface CalculatorProps {
   showHeader?: boolean;
@@ -36,7 +36,10 @@ const Calculator: React.FC<CalculatorProps> = ({
           <div className="space-y-2">
             <label className="text-xs font-medium flex justify-between">
               <span>Number of Clients</span>
-              <span className="text-muted-foreground">{inputs.clientCount}</span>
+              <span className="text-muted-foreground flex items-center">
+                {inputs.clientCount}
+                {inputs.clientCount === 25 && <Infinity className="ml-1 h-3 w-3" />}
+              </span>
             </label>
             <Slider
               value={[inputs.clientCount]}
