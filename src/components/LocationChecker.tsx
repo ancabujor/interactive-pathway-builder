@@ -106,7 +106,11 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
                 className="w-full mt-2"
                 variant="default"
               >
-                I'm ready to start my AI business <ArrowRight className="ml-2" />
+                {!showEmailField && (
+                  <>
+                    I'm ready to start my AI business <ArrowRight className="ml-2" />
+                  </>
+                )}
               </Button>
             </CollapsibleTrigger>
             <CollapsibleContent className="mt-3 space-y-2">
