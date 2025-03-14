@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
@@ -9,6 +10,7 @@ import ProgressIndicator from '@/components/ProgressIndicator';
 import SimpleFooter from '@/components/SimpleFooter';
 import TrustBuilders from '@/components/TrustBuilders';
 import { ArrowLeft, AlertCircle } from 'lucide-react';
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 
 const Step2 = () => {
   const navigate = useNavigate();
@@ -81,7 +83,40 @@ const Step2 = () => {
         </section>
 
         <div className="flex-1 overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
+          {/* Desktop view with ResizablePanelGroup */}
+          <div className="hidden md:block h-full">
+            <ResizablePanelGroup
+              direction="horizontal"
+              className="h-full w-full"
+            >
+              <ResizablePanel defaultSize={33} minSize={25} maxSize={40}>
+                <div className="h-full overflow-y-auto p-2">
+                  {stage === 'location' && (
+                    <LocationChecker onQualified={handleNextStage} />
+                  )}
+
+                  {stage === 'email' && (
+                    <EmailForm
+                      email={email}
+                      setEmail={setEmail}
+                      onSubmit={handleEmailSubmit}
+                    />
+                  )}
+                </div>
+              </ResizablePanel>
+              
+              <ResizableHandle withHandle />
+              
+              <ResizablePanel defaultSize={67}>
+                <div className="h-full overflow-hidden">
+                  <DashboardContent userData={userData} />
+                </div>
+              </ResizablePanel>
+            </ResizablePanelGroup>
+          </div>
+
+          {/* Mobile view without ResizablePanelGroup */}
+          <div className="md:hidden grid grid-cols-1 gap-4 h-full">
             <div className="flex flex-col space-y-4 overflow-y-auto">
               {stage === 'location' && (
                 <LocationChecker onQualified={handleNextStage} />
@@ -94,10 +129,6 @@ const Step2 = () => {
                   onSubmit={handleEmailSubmit}
                 />
               )}
-            </div>
-
-            <div className="hidden md:block h-full overflow-hidden">
-              <DashboardContent userData={userData} />
             </div>
           </div>
         </div>
