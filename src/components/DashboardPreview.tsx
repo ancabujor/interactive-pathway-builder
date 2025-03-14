@@ -1,26 +1,22 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { useUserContext } from '@/context/UserContext';
 import { ChevronRight, Users, DollarSign, BarChart3, CheckCircle } from 'lucide-react';
-
 interface DashboardPreviewProps {
   className?: string;
 }
-
 const DashboardPreview: React.FC<DashboardPreviewProps> = ({
   className
 }) => {
-  const { userData } = useUserContext();
-  
+  const {
+    userData
+  } = useUserContext();
   const today = new Date().toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
     year: 'numeric'
   });
-  
-  return (
-    <Card className={`overflow-hidden w-full flex flex-col ${className}`}>
+  return <Card className={`overflow-hidden w-full flex flex-col ${className}`}>
       <CardContent className="p-4">
         <div className="flex justify-between items-center mb-4">
           <div>
@@ -75,33 +71,8 @@ const DashboardPreview: React.FC<DashboardPreviewProps> = ({
           <p className="text-xl font-bold">${(userData.calculatedProfit * 12)?.toLocaleString() || '0'}</p>
         </div>
         
-        <div className="space-y-2">
-          <div className="text-sm font-medium mb-1">Quick Actions</div>
-          
-          <div className="flex items-center p-2 rounded-md hover:bg-blue-50 cursor-pointer">
-            <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-              <CheckCircle className="h-3 w-3 text-blue-600" />
-            </div>
-            <span className="text-sm">Add New Client</span>
-          </div>
-          
-          <div className="flex items-center p-2 rounded-md hover:bg-blue-50 cursor-pointer">
-            <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-              <CheckCircle className="h-3 w-3 text-blue-600" />
-            </div>
-            <span className="text-sm">View Analytics</span>
-          </div>
-          
-          <div className="flex items-center p-2 rounded-md hover:bg-blue-50 cursor-pointer">
-            <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-              <CheckCircle className="h-3 w-3 text-blue-600" />
-            </div>
-            <span className="text-sm">Manage Billing</span>
-          </div>
-        </div>
+        
       </CardContent>
-    </Card>
-  );
+    </Card>;
 };
-
 export default DashboardPreview;
