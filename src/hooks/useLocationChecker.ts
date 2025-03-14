@@ -48,10 +48,7 @@ export function useLocationChecker({ onQualified }: UseLocationCheckerProps) {
         isQualified 
       });
       
-      if (isQualified) {
-        onQualified();
-      }
-      
+      // Don't trigger onQualified callback to avoid switching away from form
       setLoading(false);
     }, 500);
   };

@@ -93,16 +93,12 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
           />
 
           {!showWaitlist ? (
-            <>
-              {location && (
-                <CompanyDetailsForm 
-                  companyName={companyName}
-                  clientCount={clientCount}
-                  onCompanyNameChange={handleCompanyNameChange}
-                  onClientCountChange={handleClientCountChange}
-                />
-              )}
-            </>
+            <CompanyDetailsForm 
+              companyName={companyName}
+              clientCount={clientCount}
+              onCompanyNameChange={handleCompanyNameChange}
+              onClientCountChange={handleClientCountChange}
+            />
           ) : (
             <WaitlistForm 
               waitlistEmail={waitlistEmail}
@@ -115,7 +111,7 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
           {!showEmailField ? (
             <Button 
               onClick={handleReadyClick} 
-              className="w-full mt-2"
+              className="w-full mt-4"
               variant="default"
               disabled={!location}
             >
