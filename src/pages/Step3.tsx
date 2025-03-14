@@ -37,14 +37,14 @@ const Step3 = () => {
     }, 3000);
   };
 
-  return <div className="h-screen flex flex-col overflow-hidden bg-secondary/30">
+  return <div className="h-screen flex flex-col overflow-hidden bg-gradient-to-br from-blue-50/50 to-purple-50/50">
       {/* Header with progress indicator */}
       <Step3Header />
 
       <main className="flex-1 flex flex-col">
         {/* Main content */}
         <div className="flex-1 flex flex-col px-4 pb-3 items-center">
-          <div className="w-full max-w-[60%] mx-auto">
+          <div className="w-full max-w-xl mx-auto">
             {/* Calculator section - centered */}
             <div className="w-full">
               <CalculatorSection 

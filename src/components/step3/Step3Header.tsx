@@ -9,12 +9,12 @@ const Step3Header: React.FC = () => {
   return (
     <>
       <ProgressIndicator currentStep={currentStep} />
-      <section className="text-center pt-3 pb-2">
-        <h1 className="text-xl font-bold tracking-tight">
+      <section className="text-center pt-5 pb-4">
+        <h1 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
           Launch Your AI Receptionist Business
         </h1>
-        <p className="text-xs text-muted-foreground">
-          Start earning monthly with a plan tailored to your goals
+        <p className="text-sm text-muted-foreground mt-1">
+          Start earning monthly profits with a plan tailored to your goals
         </p>
       </section>
     </>

@@ -9,7 +9,9 @@ import {
   SelectValue, 
 } from "@/components/ui/select";
 import { Card, CardContent } from '@/components/ui/card';
-import { DollarSign, TrendingUp } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { DollarSign, TrendingUp, Info } from 'lucide-react';
 
 // Function to determine cost per client based on volume
 const getFixedCostPerClient = (clientCount: number): number => {
@@ -21,12 +23,12 @@ const getFixedCostPerClient = (clientCount: number): number => {
 };
 
 const clientOptions = [
-  { value: "2", label: "2 Clients", cost: 97 },
-  { value: "3", label: "3 Clients", cost: 75 },
-  { value: "4", label: "4 Clients", cost: 65 },
-  { value: "5", label: "5 Clients", cost: 55 },
-  { value: "10", label: "10 Clients", cost: 50 },
-  { value: "50", label: "50+ Clients (Enterprise)", cost: 50 },
+  { value: "2", label: "2 Receptionists", cost: 97 },
+  { value: "3", label: "3 Receptionists", cost: 75 },
+  { value: "4", label: "4 Receptionists", cost: 65 },
+  { value: "5", label: "5 Receptionists", cost: 55 },
+  { value: "10", label: "10 Receptionists", cost: 50 },
+  { value: "50", label: "50+ Receptionists (Enterprise)", cost: 50 },
 ];
 
 interface PlanSelectorProps {
@@ -34,7 +36,7 @@ interface PlanSelectorProps {
 }
 
 const PlanSelector: React.FC<PlanSelectorProps> = ({ 
-  initialClientCount = 5 
+  initialClientCount = 2 
 }) => {
   const { userData, updateUserData } = useUserContext();
   const pricePerClient = 199;
@@ -68,28 +70,36 @@ const PlanSelector: React.FC<PlanSelectorProps> = ({
   const monthlyInvestment = clientCount * costPerClient;
   
   return (
-    <Card className="w-full">
+    <Card className="w-full border-2">
       <CardContent className="p-6">
         <div className="space-y-6">
           {/* Client selection dropdown */}
           <div className="space-y-2">
-            <label className="text-sm font-medium">Number of Clients</label>
+            <label className="text-sm font-medium">Number of AI Receptionists</label>
             <Select 
               defaultValue={clientCount.toString()}
               onValueChange={handleClientCountChange}
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select number of clients" />
+                <SelectValue placeholder="Select number of receptionists" />
               </SelectTrigger>
               <SelectContent className="bg-background">
                 {clientOptions.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
-                    {option.label} (${option.cost}/client)
+                    {option.label} (${option.cost}/receptionist)
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
+
+          {/* Investment clarification */}
+          <Alert className="bg-blue-50 border-blue-200">
+            <Info className="h-4 w-4 text-blue-500" />
+            <AlertDescription className="text-xs text-blue-700">
+              Your total investment will be ${monthlyInvestment}/month for {clientCount} AI receptionists.
+            </AlertDescription>
+          </Alert>
 
           {/* Results display */}
           <div className="grid grid-cols-2 gap-4 pt-4 border-t">
@@ -100,23 +110,27 @@ const PlanSelector: React.FC<PlanSelectorProps> = ({
                 <span>Monthly Investment</span>
               </div>
               <p className="text-xl font-bold">${monthlyInvestment.toLocaleString()}</p>
-              <p className="text-xs text-muted-foreground">${costPerClient} per client</p>
+              <p className="text-xs text-muted-foreground">${costPerClient} per receptionist</p>
             </div>
             
             {/* Potential profit */}
-            <div className="space-y-1">
-              <div className="flex items-center space-x-1 text-sm text-muted-foreground">
+            <div className="space-y-1 bg-green-50 p-2 rounded-md">
+              <div className="flex items-center space-x-1 text-sm text-green-700">
                 <TrendingUp className="h-3.5 w-3.5" />
                 <span>Monthly Profit</span>
+                <Badge variant="outline" className="ml-1 bg-green-100 text-green-800 border-green-200">
+                  Potential
+                </Badge>
               </div>
-              <p className="text-xl font-bold text-green-600">${profit.toLocaleString()}</p>
-              <p className="text-xs text-muted-foreground">${(pricePerClient - costPerClient)} profit per client</p>
+              <p className="text-2xl font-bold text-green-600">${profit.toLocaleString()}</p>
+              <p className="text-xs text-green-700">${(pricePerClient - costPerClient)} profit per receptionist</p>
             </div>
           </div>
 
           {/* Annual summary */}
-          <div className="bg-secondary/30 p-3 rounded-md">
-            <p className="text-sm font-medium text-center">Annual profit: <span className="text-green-600 font-bold">${(profit * 12).toLocaleString()}</span></p>
+          <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-md border border-green-100">
+            <p className="text-center font-medium">Annual potential profit</p>
+            <p className="text-3xl font-bold text-center text-green-600">${(profit * 12).toLocaleString()}</p>
           </div>
         </div>
       </CardContent>

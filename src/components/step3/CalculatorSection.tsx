@@ -13,29 +13,41 @@ interface CalculatorSectionProps {
 
 const CalculatorSection: React.FC<CalculatorSectionProps> = ({ onSelectPlan, onRequestConsultation }) => {
   const { userData } = useUserContext();
+  
+  // Dynamic button text based on client count
+  const getButtonText = () => {
+    const count = userData.clientCount || 2;
+    if (count <= 2) {
+      return "Start with 2 Receptionists";
+    } else if (count >= 50) {
+      return "Get Enterprise Quote";
+    } else {
+      return `Start with ${count} Receptionists`;
+    }
+  };
 
   return (
-    <Card className="h-full flex flex-col">
-      <CardHeader className="py-3">
+    <Card className="h-full flex flex-col shadow-md">
+      <CardHeader className="py-3 bg-gradient-to-r from-blue-50 to-purple-50">
         <div className="flex items-center justify-center space-x-1 mb-1">
           <Users className="h-4 w-4 text-primary" />
-          <CardTitle className="text-sm font-semibold">How many clients would you like to start with?</CardTitle>
+          <CardTitle className="text-sm font-semibold">How many AI receptionists would you like to start with?</CardTitle>
         </div>
       </CardHeader>
-      <CardContent className="pt-0 pb-3 px-3 flex-1">
-        <PlanSelector initialClientCount={userData.clientCount || 5} />
+      <CardContent className="pt-4 pb-3 px-3 flex-1">
+        <PlanSelector initialClientCount={userData.clientCount || 2} />
       </CardContent>
-      <CardFooter className="py-3 border-t flex flex-col space-y-2">
+      <CardFooter className="py-4 border-t flex flex-col space-y-3 bg-gray-50">
         <Button 
-          className="w-full"
+          className="w-full bg-green-600 hover:bg-green-700"
           onClick={onSelectPlan}
-          size="sm"
+          size="lg"
         >
-          Select Plan
+          {getButtonText()}
           <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
         <Button 
-          variant="ghost" 
+          variant="outline" 
           size="sm" 
           className="w-full text-muted-foreground" 
           onClick={onRequestConsultation}
