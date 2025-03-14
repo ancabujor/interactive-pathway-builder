@@ -30,16 +30,16 @@ const Step3 = () => {
     navigate('/step2');
   };
 
-  const handleSelfServiceSelection = () => {
-    toast.success('Thank you for your selection! Your account is being set up.');
+  const handleConsultationRequest = () => {
+    toast.success('Consultation request received! We\'ll be in touch shortly.');
     setTimeout(() => {
       resetUserData();
       navigate('/step1');
     }, 3000);
   };
 
-  const handleConsultationRequest = () => {
-    toast.success('Consultation request received! We\'ll be in touch shortly.');
+  const handleSelectPlan = () => {
+    toast.success('Thank you for your selection! Your account is being set up.');
     setTimeout(() => {
       resetUserData();
       navigate('/step1');
@@ -81,10 +81,10 @@ const Step3 = () => {
 
         {/* Main content */}
         <div className="flex-1 flex flex-col px-4 pb-3">
-          <div className="flex-1 grid md:grid-cols-3 gap-4">
+          <div className="flex-1 grid md:grid-cols-2 gap-4">
             {/* Calculator section */}
             <div className="md:col-span-1">
-              <Card className="h-full">
+              <Card className="h-full flex flex-col">
                 <CardHeader className="py-3">
                   <div className="flex items-center justify-center space-x-1 mb-1">
                     <Users className="h-4 w-4 text-primary" />
@@ -94,47 +94,10 @@ const Step3 = () => {
                 <CardContent className="pt-0 pb-3 px-3 flex-1">
                   <Calculator initialClientCount={userData.clientCount || 5} />
                 </CardContent>
-              </Card>
-            </div>
-
-            {/* Plan options */}
-            <div className="md:col-span-2 grid md:grid-cols-2 gap-4">
-              {/* Self-service plan */}
-              <Card className="border-2 border-primary/10 flex flex-col">
-                <CardHeader className="py-3">
-                  <div className="px-2 py-0.5 bg-primary/10 text-primary text-xs font-medium w-fit rounded-full mb-1">
-                    Most Popular
-                  </div>
-                  <CardTitle className="text-base">Self-Service Plan</CardTitle>
-                  <CardDescription className="text-xs">
-                    Get started quickly with our streamlined setup process
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="py-2 flex-1">
-                  <div className="mb-3">
-                    <p className="text-xl font-bold">${(userData.calculatedProfit * 0.8).toFixed(0)}<span className="text-xs font-normal text-muted-foreground"> /mo</span></p>
-                    <p className="text-xs text-muted-foreground">Based on {userData.clientCount} clients</p>
-                  </div>
-                  
-                  <ul className="space-y-1 text-xs">
-                    <li className="flex">
-                      <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
-                      <span>White-labeled client portal</span>
-                    </li>
-                    <li className="flex">
-                      <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
-                      <span>Automated client onboarding</span>
-                    </li>
-                    <li className="flex">
-                      <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
-                      <span>Email & chat support</span>
-                    </li>
-                  </ul>
-                </CardContent>
-                <CardFooter className="py-3">
+                <CardFooter className="py-3 border-t">
                   <Button 
                     className="w-full"
-                    onClick={handleSelfServiceSelection}
+                    onClick={handleSelectPlan}
                     size="sm"
                   >
                     Select Plan
@@ -142,14 +105,16 @@ const Step3 = () => {
                   </Button>
                 </CardFooter>
               </Card>
+            </div>
 
-              {/* Consultation plan */}
-              <Card className="flex flex-col">
+            {/* White Glove Service */}
+            <div className="md:col-span-1">
+              <Card className="h-full flex flex-col border-2 border-primary/10">
                 <CardHeader className="py-3">
-                  <div className="px-2 py-0.5 bg-secondary text-secondary-foreground text-xs font-medium w-fit rounded-full mb-1">
+                  <div className="px-2 py-0.5 bg-primary/10 text-primary text-xs font-medium w-fit rounded-full mb-1">
                     Premium Support
                   </div>
-                  <CardTitle className="text-base">Guided Implementation</CardTitle>
+                  <CardTitle className="text-base">White Glove Service</CardTitle>
                   <CardDescription className="text-xs">
                     Personalized onboarding and implementation support
                   </CardDescription>
@@ -163,7 +128,7 @@ const Step3 = () => {
                   <ul className="space-y-1 text-xs">
                     <li className="flex">
                       <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
-                      <span>Everything in Self-Service Plan</span>
+                      <span>White-labeled client portal</span>
                     </li>
                     <li className="flex">
                       <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
@@ -173,9 +138,17 @@ const Step3 = () => {
                       <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
                       <span>Priority phone & email support</span>
                     </li>
+                    <li className="flex">
+                      <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
+                      <span>Automated client onboarding</span>
+                    </li>
+                    <li className="flex">
+                      <Check className="h-3 w-3 text-primary mr-1 flex-shrink-0 mt-0.5" />
+                      <span>Customized integration setup</span>
+                    </li>
                   </ul>
                 </CardContent>
-                <CardFooter className="py-3">
+                <CardFooter className="py-3 border-t">
                   <Button 
                     variant="outline"
                     className="w-full"
