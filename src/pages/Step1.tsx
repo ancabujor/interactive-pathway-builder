@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
@@ -6,26 +5,19 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Calculator from '@/components/Calculator';
 import DashboardPreview from '@/components/DashboardPreview';
-import { ArrowRight, ChevronRight, Monitor, DollarSign, Plus, Minus, RepeatIcon, Tag, TrendingUp } from 'lucide-react';
-
+import { ArrowRight, ChevronRight, Monitor, DollarSign } from 'lucide-react';
 const Step1 = () => {
   const navigate = useNavigate();
   const {
-    setCurrentStep,
-    incrementClientCount,
-    decrementClientCount,
-    userData
+    setCurrentStep
   } = useUserContext();
-  
   const handleNextStep = () => {
     setCurrentStep(2);
     navigate('/step2');
   };
-  
-  return (
-    <div className="h-screen flex flex-col overflow-hidden bg-secondary/30">
+  return <div className="h-screen flex flex-col overflow-hidden bg-secondary/30">
       {/* Progress indicator */}
-      <header className="w-full py-1 border-b">
+      <header className="w-full py-2 border-b">
         <div className="flex justify-center items-center space-x-4 sm:space-x-8">
           <div className="flex flex-col items-center">
             <div className="step-indicator active">1</div>
@@ -45,48 +37,26 @@ const Step1 = () => {
       </header>
 
       <main className="flex-1 overflow-hidden flex flex-col">
-        {/* Hero section - reduced height */}
-        <section className="flex flex-col justify-center items-center px-2 py-1 bg-gradient-to-r from-primary/5 to-primary/10">
-          <div className="inline-block px-3 py-1 bg-primary/10 rounded-full text-xs font-medium text-primary mb-1">
+        {/* Hero section - reduced padding */}
+        <section className="flex flex-col justify-center items-center p-2 bg-gradient-to-r from-primary/5 to-primary/10">
+          <div className="inline-block px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary mb-1">
             White-Label AI Receptionist
           </div>
-          <h1 className="text-xl font-bold tracking-tight mb-1 text-center">Build a Profitable AI Business Under Your Own Brand</h1>
-          <p className="text-xs text-muted-foreground max-w-md text-center mb-1">Launch your own AI receptionist service with 262% ROI and zero development costs.</p>
+          <h1 className="text-2xl font-bold tracking-tight mb-1 text-center">Build a Profitable AI Business Under Your Own Brand</h1>
+          <p className="text-sm text-muted-foreground max-w-md text-center mb-2">Launch your own AI receptionist service with 262% ROI and zero development costs.</p>
           <Button onClick={handleNextStep} className="group" size="sm">
-            Let's Build Your Business
-            <ArrowRight className="ml-2 h-3 w-3 group-hover:translate-x-1 transition-transform" />
+            Start Assessment
+            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
         </section>
         
         {/* Main content area - Dashboard and Calculator */}
-        <div className="flex-1 grid grid-cols-3 gap-2 p-2 min-h-0 overflow-hidden">
+        <div className="flex-1 grid grid-cols-3 gap-2 p-2 min-h-0">
           {/* Reseller Dashboard preview section - 2/3 width */}
-          <section className="col-span-2 bg-background rounded-lg shadow-sm border p-2 flex flex-col overflow-hidden">
-            <div className="flex items-center justify-between mb-1">
-              <div className="flex items-center space-x-1">
-                <Monitor className="h-4 w-4 text-primary" />
-                <h2 className="text-sm font-semibold">Your Branded Reseller Command Center</h2>
-              </div>
-              <div className="flex space-x-1">
-                <Button 
-                  size="icon" 
-                  variant="outline" 
-                  className="h-6 w-6" 
-                  onClick={decrementClientCount}
-                  disabled={userData.clientCount <= 0}
-                >
-                  <Minus className="h-3 w-3" />
-                </Button>
-                <Button 
-                  size="icon" 
-                  variant="outline" 
-                  className="h-6 w-6" 
-                  onClick={incrementClientCount}
-                  disabled={userData.clientCount >= 5}
-                >
-                  <Plus className="h-3 w-3" />
-                </Button>
-              </div>
+          <section className="col-span-2 bg-background rounded-lg shadow-sm border p-2 flex flex-col">
+            <div className="flex items-center justify-center space-x-1 mb-1">
+              <Monitor className="h-4 w-4 text-primary" />
+              <h2 className="text-sm font-semibold">Reseller Dashboard</h2>
             </div>
             <div className="flex-1 overflow-hidden">
               <DashboardPreview className="h-full" />
@@ -94,60 +64,24 @@ const Step1 = () => {
           </section>
 
           {/* Calculator section - 1/3 width */}
-          <section className="col-span-1 bg-background rounded-lg shadow-sm border p-2 flex flex-col overflow-hidden">
+          <section className="col-span-1 bg-background rounded-lg shadow-sm border p-2 flex flex-col">
             <div className="flex items-center justify-center space-x-1 mb-1">
               <DollarSign className="h-4 w-4 text-primary" />
-              <h2 className="text-sm font-semibold">Your Revenue Projection Tool</h2>
+              
             </div>
-            <div className="flex-1 overflow-hidden">
+            <div className="flex-1 overflow-y-auto">
               <Calculator />
             </div>
           </section>
         </div>
-        
-        {/* Value Propositions Section */}
-        <section className="bg-background border-t py-2">
-          <div className="container mx-auto">
-            <div className="grid grid-cols-3 gap-4">
-              {/* Recurring Revenue */}
-              <div className="flex flex-col items-center text-center">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mb-1">
-                  <RepeatIcon className="h-4 w-4 text-primary" />
-                </div>
-                <h3 className="text-xs font-semibold mb-1">Recurring Revenue</h3>
-                <p className="text-xs text-muted-foreground">Monthly subscription model creates predictable cash flow</p>
-              </div>
-              
-              {/* White-Label Solution */}
-              <div className="flex flex-col items-center text-center">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mb-1">
-                  <Tag className="h-4 w-4 text-primary" />
-                </div>
-                <h3 className="text-xs font-semibold mb-1">White-Label Solution</h3>
-                <p className="text-xs text-muted-foreground">Your clients never see our branding—only yours</p>
-              </div>
-              
-              {/* Scalable Margins */}
-              <div className="flex flex-col items-center text-center">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mb-1">
-                  <TrendingUp className="h-4 w-4 text-primary" />
-                </div>
-                <h3 className="text-xs font-semibold mb-1">Scalable Margins</h3>
-                <p className="text-xs text-muted-foreground">The more clients you add, the higher your profits</p>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
-      <footer className="border-t py-1 px-4 flex justify-between items-center">
+      <footer className="border-t py-2 px-4 flex justify-between items-center">
         <p className="text-xs text-muted-foreground">White-Label AI Receptionist Program</p>
         <a href="#" className="text-xs text-primary inline-flex items-center hover:underline">
           Learn more <ChevronRight className="ml-1 h-3 w-3" />
         </a>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Step1;

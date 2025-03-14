@@ -102,18 +102,8 @@ const DashboardPreview: React.FC<DashboardPreviewProps> = ({
                 <div className="flex justify-between items-center">
                   <h2 className="text-sm font-bold">All Receptionists</h2>
                   <div className="flex space-x-1">
-                    <button className="flex items-center space-x-1 px-2 py-1 border border-gray-300 rounded text-xs">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-3 w-3">
-                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                        <line x1="8" y1="21" x2="16" y2="21"></line>
-                        <line x1="12" y1="17" x2="12" y2="21"></line>
-                      </svg>
-                      <span>Embed</span>
-                    </button>
-                    <button className="flex items-center space-x-1 px-2 py-1 border border-gray-300 rounded text-xs">
-                      <CalculatorIcon className="h-3 w-3" />
-                      <span>Earnings</span>
-                    </button>
+                    
+                    
                   </div>
                 </div>
               </div>
