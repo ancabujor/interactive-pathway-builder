@@ -1,11 +1,14 @@
 
 import React from 'react';
 import ProgressIndicator from '@/components/ProgressIndicator';
+import { useUserContext } from '@/context/UserContext';
 
 const Step3Header: React.FC = () => {
+  const { currentStep } = useUserContext();
+  
   return (
     <>
-      <ProgressIndicator currentStep={3} />
+      <ProgressIndicator currentStep={currentStep} />
       <section className="text-center pt-3 pb-2">
         <h1 className="text-xl font-bold tracking-tight">
           Select Your Reseller Plan

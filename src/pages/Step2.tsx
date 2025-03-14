@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
 import { Button } from '@/components/ui/button';
@@ -9,7 +9,7 @@ import EmailForm from '@/components/EmailForm';
 import ProgressIndicator from '@/components/ProgressIndicator';
 import SimpleFooter from '@/components/SimpleFooter';
 import { toast } from 'sonner';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, AlertCircle } from 'lucide-react';
 
 const Step2 = () => {
   const navigate = useNavigate();
@@ -19,11 +19,29 @@ const Step2 = () => {
   );
   const [email, setEmail] = useState(userData.email || '');
 
+  // Validate if we have the required information to continue
+  useEffect(() => {
+    if (!userData.location) {
+      setStage('location');
+    }
+  }, [userData.location]);
+
   const handleLocationQualified = () => {
     setStage('preview');
   };
 
   const handleEmailSubmit = () => {
+    if (!email) {
+      toast.error('Please enter your email address');
+      return;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+    
     updateUserData({ email });
     setCurrentStep(3);
     navigate('/step3');
@@ -56,6 +74,19 @@ const Step2 = () => {
     }
   };
 
+  // Render a warning if location is not selected
+  const renderLocationWarning = () => {
+    if (stage === 'preview' && !userData.location) {
+      return (
+        <div className="bg-amber-50 border border-amber-200 text-amber-700 p-2 rounded-md flex items-center mb-3">
+          <AlertCircle className="h-4 w-4 mr-2" />
+          <span className="text-xs">Please select your location first</span>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-secondary/30">
       {/* Progress indicator */}
@@ -71,6 +102,8 @@ const Step2 = () => {
             {getStageDescription()}
           </p>
         </section>
+
+        {renderLocationWarning()}
 
         {/* Two-column layout */}
         <div className="flex-1 overflow-hidden">
@@ -114,6 +147,7 @@ const Step2 = () => {
               variant="outline"
               size="sm"
               onClick={handleNextStage}
+              disabled={!userData.location}
             >
               Continue
             </Button>
