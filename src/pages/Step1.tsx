@@ -6,8 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Calculator from '@/components/Calculator';
 import DashboardPreview from '@/components/DashboardPreview';
-import PageTransition from '@/components/PageTransition';
-import { ArrowRight, ChevronRight, Monitor, DollarSign, Users } from 'lucide-react';
+import { ArrowRight, ChevronRight, Monitor, DollarSign } from 'lucide-react';
 
 const Step1 = () => {
   const navigate = useNavigate();
@@ -41,62 +40,45 @@ const Step1 = () => {
       </header>
 
       <main className="flex-1 overflow-hidden flex flex-col">
-        <div className="grid grid-cols-3 h-full">
-          {/* Hero section */}
-          <section className="col-span-3 flex flex-col justify-center items-center p-4 bg-gradient-to-r from-primary/5 to-primary/10">
-            <div className="inline-block px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary mb-2">
-              White-Label AI Receptionist
-            </div>
-            <h1 className="text-3xl font-bold tracking-tight mb-2 text-center">
-              Grow Your Business with Our White-Label Solution
-            </h1>
-            <p className="text-sm text-muted-foreground max-w-md text-center mb-4">
-              Offer cutting-edge AI receptionist services under your own brand.
-            </p>
-            <Button 
-              onClick={handleNextStep}
-              className="group"
-            >
-              Start Assessment
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </section>
-          
-          <div className="col-span-3 grid grid-cols-3 gap-3 p-3">
-            {/* Calculator section */}
-            <section className="col-span-1 bg-background rounded-lg shadow-sm border p-3">
-              <div className="flex items-center justify-center space-x-1 mb-2">
-                <DollarSign className="h-4 w-4 text-primary" />
-                <h2 className="text-sm font-semibold">Profit Calculator</h2>
-              </div>
-              <Calculator />
-            </section>
-
-            {/* Dashboard preview section */}
-            <section className="col-span-1 bg-background rounded-lg shadow-sm border p-3">
-              <div className="flex items-center justify-center space-x-1 mb-2">
-                <Monitor className="h-4 w-4 text-primary" />
-                <h2 className="text-sm font-semibold">Reseller Dashboard</h2>
-              </div>
-              <DashboardPreview />
-            </section>
-
-            {/* Client view section */}
-            <section className="col-span-1 bg-background rounded-lg shadow-sm border p-3">
-              <div className="flex items-center justify-center space-x-1 mb-2">
-                <Users className="h-4 w-4 text-primary" />
-                <h2 className="text-sm font-semibold">Client Experience</h2>
-              </div>
-              <Card className="w-full bg-muted/50 border-dashed">
-                <div className="text-center p-3">
-                  <p className="text-xs text-muted-foreground mb-2">Client interface preview</p>
-                  <div className="w-full h-32 bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg flex items-center justify-center">
-                    <p className="text-muted-foreground text-xs">Client interface</p>
-                  </div>
-                </div>
-              </Card>
-            </section>
+        {/* Hero section */}
+        <section className="flex flex-col justify-center items-center p-4 bg-gradient-to-r from-primary/5 to-primary/10">
+          <div className="inline-block px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary mb-2">
+            White-Label AI Receptionist
           </div>
+          <h1 className="text-3xl font-bold tracking-tight mb-2 text-center">
+            Grow Your Business with Our White-Label Solution
+          </h1>
+          <p className="text-sm text-muted-foreground max-w-md text-center mb-4">
+            Offer cutting-edge AI receptionist services under your own brand.
+          </p>
+          <Button 
+            onClick={handleNextStep}
+            className="group"
+          >
+            Start Assessment
+            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </section>
+        
+        {/* Main content area - Dashboard and Calculator */}
+        <div className="flex-1 grid grid-cols-3 gap-3 p-3">
+          {/* Reseller Dashboard preview section - 2/3 width */}
+          <section className="col-span-2 bg-background rounded-lg shadow-sm border p-3">
+            <div className="flex items-center justify-center space-x-1 mb-2">
+              <Monitor className="h-4 w-4 text-primary" />
+              <h2 className="text-sm font-semibold">Reseller Dashboard</h2>
+            </div>
+            <DashboardPreview className="h-full" />
+          </section>
+
+          {/* Calculator section - 1/3 width */}
+          <section className="col-span-1 bg-background rounded-lg shadow-sm border p-3">
+            <div className="flex items-center justify-center space-x-1 mb-2">
+              <DollarSign className="h-4 w-4 text-primary" />
+              <h2 className="text-sm font-semibold">Profit Calculator</h2>
+            </div>
+            <Calculator />
+          </section>
         </div>
       </main>
 
