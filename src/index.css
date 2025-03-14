@@ -107,7 +107,7 @@
   }
   
   .step-indicator {
-    @apply w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium bg-secondary text-secondary-foreground;
+    @apply w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium bg-secondary text-secondary-foreground;
   }
   
   .step-indicator.active {
@@ -128,5 +128,37 @@
   
   .page-content {
     @apply w-full h-full absolute;
+  }
+
+  /* Add client card animation */
+  .client-card-enter {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.3s forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Client count animation */
+  .count-change {
+    animation: pulse 0.5s;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+      color: theme('colors.blue.500');
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 }

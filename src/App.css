@@ -1,4 +1,5 @@
 
+/* Base styles */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -12,6 +13,7 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* Animation */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -27,10 +29,32 @@
   }
 }
 
+/* Components */
 .card {
   padding: 2em;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+/* Layout adjustments for better fit */
+.compact-layout {
+  font-size: 0.9rem;
+}
+
+.compact-card {
+  padding: 0.75rem;
+}
+
+/* Ensure Calculator properly scales */
+.calculator-container {
+  max-height: 100%;
+  overflow: hidden;
+}
+
+/* Ensure Dashboard preview fits */
+.dashboard-preview {
+  max-height: 100%;
+  overflow: hidden;
 }
