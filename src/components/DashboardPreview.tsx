@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { useUserContext } from '@/context/UserContext';
@@ -143,7 +144,7 @@ const DashboardPreview: React.FC<DashboardPreviewProps> = ({
               
               {/* Active Clients */}
               <div className="bg-white rounded-lg border border-gray-200 p-2 mb-2">
-                <h2 className="text-sm font-bold mb-1">Active Clients ({userData.clientCount || 0}/5)</h2>
+                <h2 className="text-sm font-bold mb-1">Active Clients ({userData.clientCount || 0})</h2>
                 <p className="text-gray-500 text-xs">
                   You have set up {userData.clientCount || 0} of 5 accounts.
                 </p>
