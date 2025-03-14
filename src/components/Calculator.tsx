@@ -30,7 +30,7 @@ const Calculator: React.FC<CalculatorProps> = ({
   }, [outputs.monthlyProfit, inputs.clientCount, updateUserData]);
 
   return (
-    <Card className="w-full h-full mx-auto overflow-hidden hover-scale transition-all duration-300 flex flex-col">
+    <Card className="w-full h-full mx-auto overflow-hidden transition-all duration-300 flex flex-col">
       <CardContent className="p-3 flex-1 flex flex-col justify-between">
         <div className="space-y-3">
           <div className="space-y-2">
@@ -76,7 +76,7 @@ const Calculator: React.FC<CalculatorProps> = ({
           
           {inputs.clientCount === 50 && (
             <div className="mt-2 text-center">
-              <p className="text-sm font-medium text-primary animate-pulse">
+              <p className="text-sm font-medium text-blue-500">
                 Unlimited clients, unlimited profits
               </p>
             </div>
@@ -87,13 +87,13 @@ const Calculator: React.FC<CalculatorProps> = ({
           <div className="grid grid-cols-2 gap-3">
             <div className="text-center">
               <p className="text-xs text-muted-foreground mb-1">Monthly Profit</p>
-              <p className="text-xl font-bold text-primary animate-scale-in">
+              <p className="text-xl font-bold text-blue-600">
                 ${outputs.monthlyProfit.toLocaleString()}
               </p>
             </div>
             <div className="text-center">
               <p className="text-xs text-muted-foreground mb-1">Annual Profit</p>
-              <p className="text-xl font-bold text-primary animate-scale-in">
+              <p className="text-xl font-bold text-blue-600">
                 ${outputs.yearlyProfit.toLocaleString()}
               </p>
             </div>
@@ -102,13 +102,13 @@ const Calculator: React.FC<CalculatorProps> = ({
           <div className="grid grid-cols-2 gap-3 mt-3">
             <div className="text-center">
               <p className="text-xs text-muted-foreground mb-1">Profit Per Client</p>
-              <p className="text-base font-semibold text-primary/90">
+              <p className="text-base font-semibold text-blue-500">
                 ${outputs.revenuePerClient}
               </p>
             </div>
             <div className="text-center">
               <p className="text-xs text-muted-foreground mb-1">ROI</p>
-              <p className="text-base font-semibold text-primary/90">
+              <p className="text-base font-semibold text-blue-500">
                 {outputs.roi.toFixed(0)}%
               </p>
             </div>
