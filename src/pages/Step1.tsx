@@ -6,17 +6,19 @@ import { Card } from '@/components/ui/card';
 import Calculator from '@/components/Calculator';
 import DashboardPreview from '@/components/DashboardPreview';
 import { ArrowRight, ChevronRight, Monitor, DollarSign } from 'lucide-react';
+
 const Step1 = () => {
   const navigate = useNavigate();
   const {
     setCurrentStep
   } = useUserContext();
+
   const handleNextStep = () => {
     setCurrentStep(2);
     navigate('/step2');
   };
+
   return <div className="h-screen flex flex-col overflow-hidden bg-secondary/30">
-      {/* Progress indicator */}
       <header className="w-full py-2 border-b">
         <div className="flex justify-center items-center space-x-4 sm:space-x-8">
           <div className="flex flex-col items-center">
@@ -37,7 +39,6 @@ const Step1 = () => {
       </header>
 
       <main className="flex-1 overflow-hidden flex flex-col">
-        {/* Hero section - reduced padding */}
         <section className="flex flex-col justify-center items-center p-2 bg-gradient-to-r from-primary/5 to-primary/10">
           <div className="inline-block px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary mb-1">
             White-Label AI Receptionist
@@ -50,9 +51,7 @@ const Step1 = () => {
           </Button>
         </section>
         
-        {/* Main content area - Dashboard and Calculator */}
         <div className="flex-1 grid grid-cols-3 gap-2 p-2 min-h-0">
-          {/* Reseller Dashboard preview section - 2/3 width */}
           <section className="col-span-2 bg-background rounded-lg shadow-sm border p-2 flex flex-col">
             <div className="flex items-center justify-center space-x-1 mb-1">
               <Monitor className="h-4 w-4 text-primary" />
@@ -63,11 +62,10 @@ const Step1 = () => {
             </div>
           </section>
 
-          {/* Calculator section - 1/3 width */}
           <section className="col-span-1 bg-background rounded-lg shadow-sm border p-2 flex flex-col">
             <div className="flex items-center justify-center space-x-1 mb-1">
               <DollarSign className="h-4 w-4 text-primary" />
-              
+              <h2 className="text-sm font-semibold">Your Revenue Projection Tool</h2>
             </div>
             <div className="flex-1 overflow-y-auto">
               <Calculator />
@@ -84,4 +82,5 @@ const Step1 = () => {
       </footer>
     </div>;
 };
+
 export default Step1;
