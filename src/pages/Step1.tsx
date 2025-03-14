@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
@@ -7,18 +6,16 @@ import { Card } from '@/components/ui/card';
 import Calculator from '@/components/Calculator';
 import DashboardPreview from '@/components/DashboardPreview';
 import { ArrowRight, ChevronRight, Monitor, DollarSign } from 'lucide-react';
-
 const Step1 = () => {
   const navigate = useNavigate();
-  const { setCurrentStep } = useUserContext();
-  
+  const {
+    setCurrentStep
+  } = useUserContext();
   const handleNextStep = () => {
     setCurrentStep(2);
     navigate('/step2');
   };
-
-  return (
-    <div className="h-screen flex flex-col overflow-hidden bg-secondary/30">
+  return <div className="h-screen flex flex-col overflow-hidden bg-secondary/30">
       {/* Progress indicator */}
       <header className="w-full py-2 border-b">
         <div className="flex justify-center items-center space-x-4 sm:space-x-8">
@@ -45,17 +42,9 @@ const Step1 = () => {
           <div className="inline-block px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary mb-1">
             White-Label AI Receptionist
           </div>
-          <h1 className="text-2xl font-bold tracking-tight mb-1 text-center">
-            Grow Your Business with Our White-Label Solution
-          </h1>
-          <p className="text-sm text-muted-foreground max-w-md text-center mb-2">
-            Offer cutting-edge AI receptionist services under your own brand.
-          </p>
-          <Button 
-            onClick={handleNextStep}
-            className="group"
-            size="sm"
-          >
+          <h1 className="text-2xl font-bold tracking-tight mb-1 text-center">Build a Profitable AI Business Under Your Own Brand</h1>
+          <p className="text-sm text-muted-foreground max-w-md text-center mb-2">Launch your own AI receptionist service with 262% ROI and zero development costs.</p>
+          <Button onClick={handleNextStep} className="group" size="sm">
             Start Assessment
             <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
@@ -93,8 +82,6 @@ const Step1 = () => {
           Learn more <ChevronRight className="ml-1 h-3 w-3" />
         </a>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Step1;
