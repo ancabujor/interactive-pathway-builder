@@ -21,12 +21,12 @@ const getFixedCostPerClient = (clientCount: number): number => {
 };
 
 const clientOptions = [
-  { value: "2", label: "2 Clients" },
-  { value: "3", label: "3 Clients" },
-  { value: "5", label: "5 Clients" },
-  { value: "10", label: "10 Clients" },
-  { value: "20", label: "20 Clients" },
-  { value: "50", label: "50+ Clients (Enterprise)" },
+  { value: "2", label: "2 Clients", cost: 97 },
+  { value: "3", label: "3 Clients", cost: 75 },
+  { value: "4", label: "4 Clients", cost: 65 },
+  { value: "5", label: "5 Clients", cost: 55 },
+  { value: "10", label: "10 Clients", cost: 50 },
+  { value: "50", label: "50+ Clients (Enterprise)", cost: 50 },
 ];
 
 interface PlanSelectorProps {
@@ -84,7 +84,7 @@ const PlanSelector: React.FC<PlanSelectorProps> = ({
               <SelectContent className="bg-background">
                 {clientOptions.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
-                    {option.label}
+                    {option.label} (${option.cost}/client)
                   </SelectItem>
                 ))}
               </SelectContent>
