@@ -72,7 +72,7 @@ const PlanSelector: React.FC<PlanSelectorProps> = ({
   const monthlyInvestment = clientCount * costPerClient;
   
   return (
-    <Card className="w-full border-2">
+    <Card className="w-full border bg-white shadow-none hover:shadow-sm transition-shadow duration-200">
       <CardContent className="p-6">
         <div className="space-y-6">
           {/* Client selection dropdown */}
@@ -88,8 +88,9 @@ const PlanSelector: React.FC<PlanSelectorProps> = ({
               </SelectTrigger>
               <SelectContent className="bg-background">
                 {clientOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label} (${option.cost}/receptionist)
+                  <SelectItem key={option.value} value={option.value} className="flex justify-between items-center">
+                    <span>{option.label}</span>
+                    <span className="text-muted-foreground ml-2">${option.cost}/each</span>
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -107,7 +108,7 @@ const PlanSelector: React.FC<PlanSelectorProps> = ({
           {/* Results display */}
           <div className="grid grid-cols-2 gap-4 pt-4 border-t">
             {/* Investment amount */}
-            <div className="space-y-1">
+            <div className="space-y-1 p-3 rounded-md bg-background">
               <div className="flex items-center space-x-1 text-sm text-muted-foreground">
                 <DollarSign className="h-3.5 w-3.5" />
                 <span>Monthly Investment</span>
@@ -117,7 +118,7 @@ const PlanSelector: React.FC<PlanSelectorProps> = ({
             </div>
             
             {/* Potential profit */}
-            <div className="space-y-1 bg-green-50 p-2 rounded-md">
+            <div className="space-y-1 p-3 bg-green-50 rounded-md">
               <div className="flex items-center space-x-1 text-sm text-green-700">
                 <TrendingUp className="h-3.5 w-3.5" />
                 <span>Monthly Profit</span>

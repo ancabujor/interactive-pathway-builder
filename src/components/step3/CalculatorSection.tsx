@@ -27,29 +27,32 @@ const CalculatorSection: React.FC<CalculatorSectionProps> = ({ onSelectPlan, onR
   };
 
   return (
-    <Card className="h-full flex flex-col shadow-md">
-      <CardHeader className="py-3 bg-gradient-to-r from-blue-50 to-purple-50">
-        <div className="flex items-center justify-center space-x-1 mb-1">
-          <Users className="h-4 w-4 text-primary" />
-          <CardTitle className="text-sm font-semibold">How many AI receptionists would you like to start with?</CardTitle>
+    <Card className="h-full flex flex-col shadow-md overflow-hidden bg-white">
+      <CardHeader className="py-4 bg-gradient-to-r from-blue-50 to-purple-50 border-b">
+        <div className="flex items-center justify-center space-x-2 mb-1">
+          <Users className="h-5 w-5 text-primary" />
+          <CardTitle className="text-base font-semibold">Choose Your AI Receptionist Plan</CardTitle>
         </div>
       </CardHeader>
-      <CardContent className="pt-4 pb-3 px-3 flex-1">
+      
+      <CardContent className="pt-6 pb-4 px-6 flex-1">
         <PlanSelector initialClientCount={userData.clientCount || 2} />
       </CardContent>
-      <CardFooter className="py-4 border-t flex flex-col space-y-3 bg-gray-50">
+      
+      <CardFooter className="py-5 border-t flex flex-col space-y-3 bg-gray-50 px-6">
         <Button 
-          className="w-full bg-green-600 hover:bg-green-700"
+          className="w-full bg-green-600 hover:bg-green-700 transition-all duration-200 shadow-sm hover:shadow-md"
           onClick={onSelectPlan}
           size="lg"
         >
           {getButtonText()}
           <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
+        
         <Button 
           variant="outline" 
           size="sm" 
-          className="w-full text-muted-foreground" 
+          className="w-full text-muted-foreground border-muted hover:bg-muted/10" 
           onClick={onRequestConsultation}
         >
           <MessageCircle className="mr-2 h-4 w-4" />

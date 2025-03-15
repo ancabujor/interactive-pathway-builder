@@ -37,25 +37,28 @@ const Step3 = () => {
     }, 3000);
   };
 
-  return <div className="h-screen flex flex-col overflow-hidden bg-gradient-to-br from-blue-50/50 to-purple-50/50">
+  return (
+    <div className="h-screen flex flex-col overflow-hidden bg-gradient-to-br from-blue-50/80 to-purple-50/80">
       {/* Header with progress indicator */}
       <Step3Header />
 
       <main className="flex-1 flex flex-col">
         {/* Main content */}
         <div className="flex-1 flex flex-col px-4 pb-3 items-center">
-          <div className="w-full max-w-xl mx-auto">
-            {/* Calculator section - centered */}
-            <div className="w-full">
+          <div className="w-full max-w-xl mx-auto pt-4">
+            {/* Calculator section - centered with improved shadow */}
+            <div className="w-full transform transition-all duration-300 hover:translate-y-[-2px]">
               <CalculatorSection 
                 onSelectPlan={handleSelectPlan} 
                 onRequestConsultation={handleConsultationRequest} 
               />
             </div>
+            
+            {/* Trust builders */}
+            <div className="mt-6 pt-4 border-t">
+              <TrustBuilders />
+            </div>
           </div>
-
-          {/* Trust builders */}
-          <TrustBuilders />
         </div>
 
         {/* Navigation buttons */}
@@ -63,7 +66,8 @@ const Step3 = () => {
       </main>
 
       <SimpleFooter />
-    </div>;
+    </div>
+  );
 };
 
 export default Step3;

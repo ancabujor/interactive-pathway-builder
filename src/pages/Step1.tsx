@@ -1,11 +1,11 @@
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
 import { Button } from '@/components/ui/button';
-import Calculator from '@/components/Calculator';
 import DashboardPreview from '@/components/DashboardPreview';
 import TrustBuilders from '@/components/TrustBuilders';
-import { ArrowRight, ChevronRight, Monitor, DollarSign } from 'lucide-react';
+import { ArrowRight, ChevronRight } from 'lucide-react';
 
 const Step1 = () => {
   const navigate = useNavigate();
@@ -18,7 +18,8 @@ const Step1 = () => {
     navigate('/step2');
   };
 
-  return <div className="h-screen flex flex-col overflow-hidden bg-secondary/30">
+  return (
+    <div className="h-screen flex flex-col overflow-hidden bg-secondary/30">
       <header className="w-full py-2 border-b">
         <div className="flex justify-center items-center space-x-4 sm:space-x-8">
           <div className="flex flex-col items-center">
@@ -39,41 +40,45 @@ const Step1 = () => {
       </header>
 
       <main className="flex-1 overflow-hidden flex flex-col">
-        <section className="flex flex-col justify-center items-center p-2 bg-gradient-to-r from-primary/5 to-primary/10">
-          <div className="inline-block px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary mb-1">
-            White-Label AI Receptionist
-          </div>
-          <h1 className="text-2xl font-bold tracking-tight mb-1 text-center">Build a Profitable AI Business Under Your Own Brand</h1>
-          <p className="text-sm text-muted-foreground max-w-md text-center mb-2">Launch your own AI receptionist service with zero development costs.</p>
-          <Button onClick={handleNextStep} className="group" size="sm">
-            Let's Build Your Business
-            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
-        </section>
-        
-        <div className="flex-1 grid grid-cols-3 gap-2 p-2 min-h-0">
-          <section className="col-span-2 bg-background rounded-lg shadow-sm border p-2 flex flex-col">
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-2 p-2 min-h-0">
+          {/* Left Side - Value Proposition */}
+          <section className="flex flex-col justify-center p-6 bg-gradient-to-br from-background to-primary/5 rounded-lg border shadow-sm">
+            <div className="max-w-md mx-auto space-y-6">
+              <div className="inline-block px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary">
+                White-Label AI Receptionist
+              </div>
+              
+              <div className="space-y-4">
+                <h1 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight">
+                  Build a Profitable AI Business Under Your Own Brand
+                </h1>
+                <p className="text-lg text-muted-foreground">
+                  Launch your own AI receptionist service with zero development costs.
+                </p>
+                
+                <Button onClick={handleNextStep} className="group" size="lg">
+                  Let's Build Your Business
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </div>
+              
+              {/* Trust Builders Section */}
+              <div className="pt-8">
+                <TrustBuilders />
+              </div>
+            </div>
+          </section>
+          
+          {/* Right Side - Demo Dashboard */}
+          <section className="bg-background rounded-lg shadow-sm border p-2 flex flex-col">
             <div className="flex items-center justify-center space-x-1 mb-1">
-              <Monitor className="h-4 w-4 text-primary" />
               <h2 className="text-sm font-semibold">Your Branded Reseller Command Center</h2>
             </div>
             <div className="flex-1 overflow-hidden">
               <DashboardPreview className="h-full" />
             </div>
           </section>
-
-          <section className="col-span-1 bg-background rounded-lg shadow-sm border-2 border-blue-400 p-2 flex flex-col bg-blue-50/50">
-            <div className="flex items-center justify-center space-x-1 mb-1">
-              <DollarSign className="h-4 w-4 text-primary" />
-              <h2 className="text-sm font-semibold">Your Revenue Projection Tool</h2>
-            </div>
-            <div className="flex-1 overflow-y-auto">
-              <Calculator />
-            </div>
-          </section>
         </div>
-        
-        <TrustBuilders />
       </main>
 
       <footer className="border-t py-2 px-4 flex justify-between items-center">
@@ -82,7 +87,8 @@ const Step1 = () => {
           Learn more <ChevronRight className="ml-1 h-3 w-3" />
         </a>
       </footer>
-    </div>;
+    </div>
+  );
 };
 
 export default Step1;

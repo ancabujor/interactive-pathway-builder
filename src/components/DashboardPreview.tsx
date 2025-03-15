@@ -10,7 +10,7 @@ const DashboardPreview: React.FC<DashboardPreviewProps> = ({
   className
 }) => {
   return (
-    <Card className={`w-full h-full overflow-hidden ${className}`}>
+    <Card className={`w-full h-full overflow-hidden shadow-lg border-2 border-primary/10 transition-all duration-300 hover:shadow-xl hover:border-primary/20 ${className}`}>
       <CardContent className="p-0 h-full">
         <iframe 
           src="https://demo.folio.la/uOlaHJrK" 
