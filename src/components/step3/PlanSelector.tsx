@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useUserContext } from '@/context/UserContext';
 import { 
   Select,
@@ -11,7 +11,8 @@ import {
 import { Card, CardContent } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
-import { DollarSign, TrendingUp, Info } from 'lucide-react';
+import { DollarSign, TrendingUp, Info, Pencil, XCircle, Check } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 
 // Function to determine cost per client based on volume
 const getFixedCostPerClient = (clientCount: number): number => {
@@ -38,7 +39,9 @@ const PlanSelector: React.FC<PlanSelectorProps> = ({
   initialClientCount = 2 
 }) => {
   const { userData, updateUserData } = useUserContext();
-  const pricePerClient = 199;
+  const [pricePerClient, setPricePerClient] = useState(199);
+  const [editingPrice, setEditingPrice] = useState(false);
+  const [tempPrice, setTempPrice] = useState(pricePerClient.toString());
   
   // Handle client count change
   const handleClientCountChange = (value: string) => {
@@ -53,6 +56,34 @@ const PlanSelector: React.FC<PlanSelectorProps> = ({
       calculatedProfit: profit,
       clientCount: count
     });
+  };
+
+  // Handle price editing
+  const startEditingPrice = () => {
+    setTempPrice(pricePerClient.toString());
+    setEditingPrice(true);
+  };
+
+  const confirmPriceEdit = () => {
+    const newPrice = parseInt(tempPrice);
+    if (!isNaN(newPrice) && newPrice >= 0) {
+      setPricePerClient(newPrice);
+      
+      // Recalculate profit with the new price
+      const clientCount = userData.clientCount || 2;
+      const costPerClient = getFixedCostPerClient(clientCount);
+      const profit = clientCount * (newPrice - costPerClient);
+      
+      // Update user context
+      updateUserData({ 
+        calculatedProfit: profit
+      });
+    }
+    setEditingPrice(false);
+  };
+
+  const cancelPriceEdit = () => {
+    setEditingPrice(false);
   };
   
   // Initialize with the initial client count
@@ -97,24 +128,63 @@ const PlanSelector: React.FC<PlanSelectorProps> = ({
             </Select>
           </div>
 
+          {/* Price setting with edit option */}
+          <div className="space-y-2 border p-3 rounded-md bg-blue-50/50">
+            <label className="text-sm font-medium flex justify-between items-center">
+              <span>Your Selling Price per Receptionist</span>
+              {!editingPrice && (
+                <button onClick={startEditingPrice} className="text-blue-600 hover:text-blue-800 inline-flex items-center text-xs">
+                  <Pencil className="h-3 w-3 mr-1" />
+                  Edit
+                </button>
+              )}
+            </label>
+            
+            {editingPrice ? (
+              <div className="flex space-x-2">
+                <div className="relative flex-1">
+                  <span className="absolute left-3 top-2 text-gray-500">$</span>
+                  <Input 
+                    type="number"
+                    value={tempPrice}
+                    onChange={(e) => setTempPrice(e.target.value)}
+                    min="0"
+                    className="pl-7"
+                    autoFocus
+                  />
+                </div>
+                <button onClick={confirmPriceEdit} className="p-2 bg-green-50 text-green-600 rounded-md hover:bg-green-100">
+                  <Check className="h-4 w-4" />
+                </button>
+                <button onClick={cancelPriceEdit} className="p-2 bg-red-50 text-red-600 rounded-md hover:bg-red-100">
+                  <XCircle className="h-4 w-4" />
+                </button>
+              </div>
+            ) : (
+              <div className="text-lg font-bold text-blue-600">${pricePerClient}</div>
+            )}
+            <p className="text-xs text-blue-700">This is what you'll charge your clients per receptionist</p>
+          </div>
+
           {/* Investment clarification */}
           <Alert className="bg-blue-50 border-blue-200">
             <Info className="h-4 w-4 text-blue-500" />
             <AlertDescription className="text-xs text-blue-700">
               Your total investment will be ${monthlyInvestment}/month for {clientCount} AI receptionists.
+              <span className="block mt-1 font-medium">Cancel anytime - no long-term contracts.</span>
             </AlertDescription>
           </Alert>
 
           {/* Results display */}
           <div className="grid grid-cols-2 gap-4 pt-4 border-t">
             {/* Investment amount */}
-            <div className="space-y-1 p-3 rounded-md bg-background">
-              <div className="flex items-center space-x-1 text-sm text-muted-foreground">
+            <div className="space-y-1 p-3 rounded-md bg-red-50">
+              <div className="flex items-center space-x-1 text-sm text-red-700">
                 <DollarSign className="h-3.5 w-3.5" />
                 <span>Monthly Investment</span>
               </div>
-              <p className="text-xl font-bold">${monthlyInvestment.toLocaleString()}</p>
-              <p className="text-xs text-muted-foreground">${costPerClient} per receptionist</p>
+              <p className="text-xl font-bold text-red-600">${monthlyInvestment.toLocaleString()}</p>
+              <p className="text-xs text-red-700">${costPerClient} per receptionist</p>
             </div>
             
             {/* Potential profit */}
@@ -135,6 +205,9 @@ const PlanSelector: React.FC<PlanSelectorProps> = ({
           <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-md border border-green-100">
             <p className="text-center font-medium">Annual potential profit</p>
             <p className="text-3xl font-bold text-center text-green-600">${(profit * 12).toLocaleString()}</p>
+            <p className="text-xs text-center mt-1 text-muted-foreground">
+              If you charge each client ${pricePerClient}/month per receptionist
+            </p>
           </div>
         </div>
       </CardContent>

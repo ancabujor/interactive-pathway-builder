@@ -87,7 +87,7 @@ const Step2 = () => {
       <main className="flex-1 flex flex-col px-4 py-4 overflow-hidden">
         <section className="text-center mb-4">
           <h1 className="text-xl font-bold tracking-tight mb-1">
-            Your Custom Business Opportunity
+            Personalize Your AI Business Blueprint
           </h1>
           <p className="text-sm text-muted-foreground">
             {getStageDescription()}
