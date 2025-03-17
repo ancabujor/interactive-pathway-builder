@@ -40,17 +40,11 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
   } = useEmailSubmission();
 
   const handleReadyButtonClick = () => {
-    // When ready is clicked, move to the next stage (receptionist) immediately
     handleReadyClick(location);
-    // Trigger the onQualified callback to move to the receptionist stage
-    if (location) {
-      onQualified();
-    }
   };
 
   const handleEmailSubmission = () => {
-    // Pass onQualified as the next stage handler
-    handleSubmitEmail(readyEmail, onQualified);
+    handleSubmitEmail(readyEmail);
   };
 
   const shouldShowReadyButton = location && !showWaitlist && !showEmailField;
