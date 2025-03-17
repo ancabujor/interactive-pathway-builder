@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '@/context/UserContext';
 import { toast } from 'sonner';
@@ -16,9 +16,14 @@ const Step3 = () => {
     resetUserData
   } = useUserContext();
 
+  useEffect(() => {
+    // Update to step 4
+    setCurrentStep(4);
+  }, []);
+
   const handlePreviousPage = () => {
-    setCurrentStep(2);
-    navigate('/step2');
+    setCurrentStep(3);
+    navigate('/receptionist-demo');
   };
 
   const handleConsultationRequest = () => {

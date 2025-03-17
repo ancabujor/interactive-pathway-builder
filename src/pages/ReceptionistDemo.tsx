@@ -5,7 +5,7 @@ import { useUserContext } from '@/context/UserContext';
 import { Button } from '@/components/ui/button';
 import ProgressIndicator from '@/components/ProgressIndicator';
 import SimpleFooter from '@/components/SimpleFooter';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 const ReceptionistDemo = () => {
   const navigate = useNavigate();
@@ -20,13 +20,13 @@ const ReceptionistDemo = () => {
 
   const handleTryDemo = () => {
     // Here we would trigger the demo flow
-    // For now, we'll just add a placeholder
     console.log("Demo activation would happen here");
-  };
-
-  const handleContinue = () => {
-    setCurrentStep(4); // Step 4 would be the current step 3
-    navigate('/step3');
+    
+    // After demo is complete, proceed to the next step
+    setTimeout(() => {
+      setCurrentStep(4);
+      navigate('/step3');
+    }, 1000);
   };
 
   const handleBack = () => {
@@ -41,7 +41,7 @@ const ReceptionistDemo = () => {
       <main className="flex-1 flex flex-col px-4 py-8 overflow-auto">
         <section className="text-center mb-6">
           <h1 className="text-2xl font-bold tracking-tight mb-2">
-            Try Our AI Receptionist Demo
+            Test Our AI Receptionist
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Before proceeding, we recommend testing our AI receptionist to ensure it meets your quality standards. This short demo will give you a feel for what your clients will experience.
@@ -71,7 +71,7 @@ const ReceptionistDemo = () => {
           </div>
         </div>
 
-        <div className="flex justify-between items-center w-full mt-auto">
+        <div className="flex justify-start items-center w-full mt-auto">
           <Button
             variant="ghost"
             size="sm"
@@ -80,15 +80,6 @@ const ReceptionistDemo = () => {
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back
-          </Button>
-          
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleContinue}
-          >
-            Skip Demo
-            <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
       </main>
