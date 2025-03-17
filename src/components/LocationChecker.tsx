@@ -6,6 +6,9 @@ import CompanyDetailsForm from '@/components/company/CompanyDetailsForm';
 import WaitlistForm from '@/components/waitlist/WaitlistForm';
 import LocationNotification from '@/components/notifications/LocationNotification';
 import { useLocationChecker } from '@/hooks/useLocationChecker';
+import { useEmailSubmission } from '@/hooks/useEmailSubmission';
+import ReadyButton from '@/components/location/ReadyButton';
+import ReadyEmailForm from '@/components/location/ReadyEmailForm';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Info } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -40,6 +43,25 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({
     handleCompanyNameChange,
     handleClientCountChange
   } = useLocationChecker({ onQualified });
+
+  const {
+    readyEmail,
+    emailError,
+    showEmailField,
+    handleEmailChange,
+    handleReadyClick,
+    handleSubmitEmail
+  } = useEmailSubmission();
+
+  const handleReadyButtonClick = () => {
+    handleReadyClick(location);
+  };
+
+  const handleEmailSubmission = () => {
+    handleSubmitEmail(readyEmail);
+  };
+
+  const shouldShowReadyButton = location && !showWaitlist && !showEmailField;
 
   return (
     <Card className="w-full mx-auto">
@@ -100,6 +122,19 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({
                   </div>
                 </>
               )}
+
+              <ReadyButton 
+                onClick={handleReadyButtonClick} 
+                show={shouldShowReadyButton} 
+              />
+
+              <ReadyEmailForm 
+                showEmailField={showEmailField}
+                readyEmail={readyEmail}
+                emailError={emailError}
+                onEmailChange={handleEmailChange}
+                onSubmit={handleEmailSubmission}
+              />
             </>
           )}
         </div>
