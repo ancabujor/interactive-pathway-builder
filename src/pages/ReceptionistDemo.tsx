@@ -41,19 +41,31 @@ const ReceptionistDemo = () => {
       <main className="flex-1 flex flex-col px-4 py-8 overflow-auto">
         <section className="text-center mb-6">
           <h1 className="text-2xl font-bold tracking-tight mb-2">
-            Test Our AI Receptionist
+            Test Drive Your AI Receptionist
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Before proceeding, we recommend testing our AI receptionist to ensure it meets your quality standards. This short demo will give you a feel for what your clients will experience.
+            Before selling to clients, experience the power of our AI receptionist technology yourself.
           </p>
         </section>
 
         <div className="flex flex-col gap-6 items-center max-w-2xl mx-auto p-6 bg-background rounded-lg shadow-sm border">
           <div className="text-center space-y-4">
-            <h2 className="text-lg font-semibold">Experience the AI Receptionist Firsthand</h2>
-            <p className="text-sm text-muted-foreground">
-              As a reseller, your reputation depends on the quality of the solutions you provide. Take a moment to test how our AI receptionist handles calls so you can confidently offer this service to your clients.
-            </p>
+            <h2 className="text-lg font-semibold">Why Testing First Matters:</h2>
+            <ul className="text-sm text-left list-disc pl-5 space-y-2">
+              <li><span className="font-medium">Sell with confidence</span> - Understand exactly what you're offering</li>
+              <li><span className="font-medium">Create compelling demos</span> - Show prospects real capabilities you've experienced</li>
+              <li><span className="font-medium">Set up client success</span> - Master customization and workflows</li>
+              <li><span className="font-medium">Build better packages</span> - Develop targeted pricing based on feature value</li>
+            </ul>
+            
+            <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100 italic text-sm">
+              <p className="text-blue-800">
+                "Testing the AI receptionist first gave me the confidence to pitch to clients authentically. It's been a game-changer for my agency's credibility."
+              </p>
+              <p className="text-blue-600 font-medium mt-2">
+                — Michael T., Digital Marketing Agency Owner
+              </p>
+            </div>
             
             <div className="flex flex-col gap-4 mt-6">
               <Button 
@@ -61,12 +73,8 @@ const ReceptionistDemo = () => {
                 className="w-full"
                 onClick={handleTryDemo}
               >
-                Try Demo Now
+                TEST THE AI RECEPTIONIST NOW
               </Button>
-              
-              <p className="text-xs text-muted-foreground">
-                This will open our demo interface where you can interact with the AI receptionist.
-              </p>
             </div>
           </div>
         </div>
