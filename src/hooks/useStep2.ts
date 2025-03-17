@@ -16,13 +16,16 @@ export function useStep2() {
     if (currentStep !== 2) {
       setCurrentStep(2);
     }
-  }, []);
-
-  useEffect(() => {
-    if (!userData.location) {
+    
+    // If the user already has an email, skip to the receptionist stage
+    if (userData.email) {
+      setStage('receptionist');
+    } else if (userData.location) {
+      setStage('email');
+    } else {
       setStage('location');
     }
-  }, [userData.location]);
+  }, []);
 
   // Animation effect when user data changes
   useEffect(() => {
@@ -83,6 +86,8 @@ export function useStep2() {
   const handleNextStage = () => {
     if (stage === 'location' && userData.location) {
       setStage('email');
+    } else if (stage === 'email' && userData.email) {
+      setStage('receptionist');
     }
   };
 
@@ -97,6 +102,7 @@ export function useStep2() {
 
   return {
     stage,
+    setStage,
     email,
     setEmail,
     showPreviewUpdate,

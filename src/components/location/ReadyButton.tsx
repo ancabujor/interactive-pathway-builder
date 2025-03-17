@@ -12,7 +12,7 @@ const ReadyButton: React.FC<ReadyButtonProps> = ({ onClick, show }) => {
   if (!show) return null;
   
   return (
-    <Button onClick={onClick} className="w-full mt-4" variant="default">
+    <Button onClick={onClick} className="w-full mt-4 bg-primary hover:bg-primary/90" variant="default">
       I'm ready to start my AI business <ArrowRight className="ml-2" />
     </Button>
   );
