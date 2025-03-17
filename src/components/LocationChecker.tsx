@@ -127,7 +127,7 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({
                         className="w-full mt-4" 
                         onClick={handleContinue}
                       >
-                        Continue to Email Collection
+                        Start my AI Business
                       </Button>
                     )}
                   </div>

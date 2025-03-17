@@ -47,7 +47,7 @@ const ReadyEmailForm: React.FC<ReadyEmailFormProps> = ({
             disabled={!readyEmail || !!emailError} 
             size="sm"
           >
-            Start My AI Business <ArrowRight className="ml-1 w-3 h-3" />
+            Start my AI Business <ArrowRight className="ml-1 w-3 h-3" />
           </Button>
         </div>
       </CollapsibleContent>
