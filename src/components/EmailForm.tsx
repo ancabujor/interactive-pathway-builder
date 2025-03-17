@@ -53,7 +53,7 @@ const EmailForm: React.FC<EmailFormProps> = ({
         className="w-full"
         onClick={handleSubmit}
       >
-        View Plans & Pricing
+        Start my AI Business
         <ArrowRight className="ml-2 h-4 w-4" />
       </Button>
       
