@@ -1,28 +1,20 @@
 
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import React from 'react';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import LocationSelector from '@/components/location/LocationSelector';
 import CompanyDetailsForm from '@/components/company/CompanyDetailsForm';
 import WaitlistForm from '@/components/waitlist/WaitlistForm';
 import LocationNotification from '@/components/notifications/LocationNotification';
 import { useLocationChecker } from '@/hooks/useLocationChecker';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Mail } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible';
-import { useUserContext } from '@/context/UserContext';
+import { useEmailSubmission } from '@/hooks/useEmailSubmission';
+import ReadyButton from '@/components/location/ReadyButton';
+import ReadyEmailForm from '@/components/location/ReadyEmailForm';
+
 interface LocationCheckerProps {
   onQualified: () => void;
 }
-const LocationChecker: React.FC<LocationCheckerProps> = ({
-  onQualified
-}) => {
-  const navigate = useNavigate();
-  const {
-    setCurrentStep
-  } = useUserContext();
+
+const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
   const {
     location,
     loading,
@@ -36,82 +28,83 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({
     setWaitlistEmail,
     handleCompanyNameChange,
     handleClientCountChange
-  } = useLocationChecker({
-    onQualified
-  });
-  const [showEmailField, setShowEmailField] = useState(false);
-  const [readyEmail, setReadyEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const handleReadyClick = () => {
-    if (!location) {
-      // Just focus on the location field if empty instead of showing toast
-      return;
-    }
-    setShowEmailField(true);
+  } = useLocationChecker({ onQualified });
+
+  const {
+    readyEmail,
+    emailError,
+    showEmailField,
+    handleEmailChange,
+    handleReadyClick,
+    handleSubmitEmail
+  } = useEmailSubmission();
+
+  const handleReadyButtonClick = () => {
+    handleReadyClick(location);
   };
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+
+  const handleEmailSubmission = () => {
+    handleSubmitEmail(readyEmail);
   };
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const email = e.target.value;
-    setReadyEmail(email);
-    if (email && !validateEmail(email)) {
-      setEmailError('Please enter a valid email address');
-    } else {
-      setEmailError('');
-    }
-  };
-  const handleSubmitEmail = () => {
-    if (readyEmail && validateEmail(readyEmail)) {
-      setWaitlistEmail(readyEmail);
-      setCurrentStep(3);
-      navigate('/step3');
-    } else if (readyEmail) {
-      setEmailError('Please enter a valid email address');
-    }
-  };
-  return <Card className="w-full mx-auto">
+
+  const shouldShowReadyButton = location && !showWaitlist && !showEmailField;
+
+  return (
+    <Card className="w-full mx-auto">
       <CardHeader className="py-3">
-        
+        {/* Header intentionally left empty as in the original component */}
       </CardHeader>
       <CardContent className="py-2">
         <div className="space-y-2">
-          <LocationSelector location={location} onLocationChange={handleLocationChange} />
+          <LocationSelector 
+            location={location} 
+            onLocationChange={handleLocationChange} 
+          />
           
-          <LocationNotification location={userData.location} isQualified={userData.isQualified} />
+          <LocationNotification 
+            location={userData.location} 
+            isQualified={userData.isQualified} 
+          />
 
-          {location === 'Not listed' ? <WaitlistForm waitlistEmail={waitlistEmail} onEmailChange={e => setWaitlistEmail(e.target.value)} onSubmit={submitWaitlist} loading={loading} /> : <>
-              {location && !showWaitlist && <CompanyDetailsForm companyName={companyName} clientCount={clientCount} onCompanyNameChange={handleCompanyNameChange} onClientCountChange={handleClientCountChange} />}
+          {location === 'Not listed' ? (
+            <WaitlistForm 
+              waitlistEmail={waitlistEmail} 
+              onEmailChange={e => setWaitlistEmail(e.target.value)} 
+              onSubmit={submitWaitlist} 
+              loading={loading} 
+            />
+          ) : (
+            <>
+              {location && !showWaitlist && (
+                <CompanyDetailsForm 
+                  companyName={companyName} 
+                  clientCount={clientCount} 
+                  onCompanyNameChange={handleCompanyNameChange} 
+                  onClientCountChange={handleClientCountChange} 
+                />
+              )}
 
-              {!showEmailField && location ? <Button onClick={handleReadyClick} className="w-full mt-4" variant="default">
-                  I'm ready to start my AI business <ArrowRight className="ml-2" />
-                </Button> : null}
+              <ReadyButton 
+                onClick={handleReadyButtonClick} 
+                show={shouldShowReadyButton} 
+              />
 
-              {showEmailField && <Collapsible open={true} className="mt-3">
-                  <CollapsibleContent className="mt-3 space-y-2">
-                    <div className="bg-muted/50 p-2 rounded text-sm">
-                      <p className="font-medium">Perfect! Your personalized dashboard is ready. Where should we send your business plan?</p>
-                    </div>
-                    <div className="space-y-1">
-                      <Label htmlFor="ready-email">Email Address</Label>
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                        <Input id="ready-email" placeholder="you@example.com" value={readyEmail} onChange={handleEmailChange} className={`pl-9 ${emailError ? 'border-red-500 focus-visible:ring-red-500' : ''}`} type="email" />
-                      </div>
-                      {emailError && <p className="text-xs text-red-500 mt-1">{emailError}</p>}
-                      <Button onClick={handleSubmitEmail} className="w-full mt-2" disabled={!readyEmail || !!emailError} size="sm">
-                        Start My AI Business <ArrowRight className="ml-1 w-3 h-3" />
-                      </Button>
-                    </div>
-                  </CollapsibleContent>
-                </Collapsible>}
-            </>}
+              <ReadyEmailForm 
+                showEmailField={showEmailField}
+                readyEmail={readyEmail}
+                emailError={emailError}
+                onEmailChange={handleEmailChange}
+                onSubmit={handleEmailSubmission}
+              />
+            </>
+          )}
         </div>
       </CardContent>
       <CardFooter className="py-2">
         {/* Card footer intentionally left empty as it was in the original component */}
       </CardFooter>
-    </Card>;
+    </Card>
+  );
 };
+
 export default LocationChecker;

@@ -1,7 +1,6 @@
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-type UserData = {
+export type UserData = {
   location: string;
   companyName: string;
   clientCount: number;
