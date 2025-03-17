@@ -9,7 +9,7 @@ export function useStep2() {
   const [stage, setStage] = useState<'location' | 'email' | 'receptionist'>('location');
   const [email, setEmail] = useState(userData.email || '');
   const [showPreviewUpdate, setShowPreviewUpdate] = useState(false);
-  const [hasTestedReceptionist, setHasTestedReceptionist] = useState<string | undefined>(undefined);
+  const [hasTestedReceptionist, setHasTestedReceptionist] = useState<string | undefined>(userData.hasTestedReceptionist);
   const [showReceptionistAlert, setShowReceptionistAlert] = useState(false);
 
   useEffect(() => {
@@ -17,10 +17,8 @@ export function useStep2() {
       setCurrentStep(2);
     }
     
-    // If the user already has an email, skip to the receptionist stage
-    if (userData.email) {
-      setStage('receptionist');
-    } else if (userData.location) {
+    // If the user already has completed the receptionist test, go to email stage
+    if (userData.hasTestedReceptionist) {
       setStage('email');
     } else {
       setStage('location');
@@ -49,26 +47,20 @@ export function useStep2() {
     }
     
     updateUserData({ email });
-    setStage('receptionist');
+    navigate('/step3');
   };
 
   const handleReceptionistResponse = (value: string) => {
     setHasTestedReceptionist(value);
     setShowReceptionistAlert(true);
-    
-    // If they haven't tested the receptionist, we'd redirect them to a demo page
-    if (value === 'no') {
-      // In a real implementation, we would redirect to a demo page
-      console.log("User hasn't tested the receptionist, should redirect to demo");
-    }
+    updateUserData({ hasTestedReceptionist: value });
   };
 
   const handleContinue = () => {
     if (hasTestedReceptionist === 'no') {
       navigate('/receptionist-demo');
     } else {
-      setCurrentStep(3);
-      navigate('/step3');
+      setStage('email');
     }
   };
 
@@ -78,16 +70,15 @@ export function useStep2() {
       navigate('/step1');
     } else if (stage === 'email') {
       setStage('location');
-    } else if (stage === 'receptionist') {
-      setStage('email');
     }
   };
 
   const handleNextStage = () => {
     if (stage === 'location' && userData.location) {
-      setStage('email');
+      // No longer automatically advancing to email stage
+      // Email stage is now presented after completing the receptionist test
     } else if (stage === 'email' && userData.email) {
-      setStage('receptionist');
+      navigate('/step3');
     }
   };
 

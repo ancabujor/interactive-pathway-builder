@@ -3,7 +3,6 @@ import React from 'react';
 import { UserData } from '@/context/UserContext';
 import LocationChecker from '@/components/LocationChecker';
 import EmailForm from '@/components/EmailForm';
-import StageSelector from './StageSelector';
 
 interface StepContentProps {
   stage: 'location' | 'email' | 'receptionist';
@@ -33,7 +32,13 @@ const StepContent: React.FC<StepContentProps> = ({
   return (
     <div className="flex flex-col space-y-4 overflow-y-auto bg-background p-4 rounded-lg border">
       {stage === 'location' && (
-        <LocationChecker onQualified={handleNextStage} />
+        <LocationChecker 
+          onQualified={handleNextStage} 
+          handleReceptionistResponse={handleReceptionistResponse}
+          showReceptionistAlert={showReceptionistAlert}
+          hasTestedReceptionist={hasTestedReceptionist}
+          handleContinue={handleContinue}
+        />
       )}
 
       {stage === 'email' && (
@@ -41,15 +46,6 @@ const StepContent: React.FC<StepContentProps> = ({
           email={email}
           setEmail={setEmail}
           onSubmit={handleEmailSubmit}
-        />
-      )}
-
-      {stage === 'receptionist' && (
-        <StageSelector 
-          handleReceptionistResponse={handleReceptionistResponse}
-          showReceptionistAlert={showReceptionistAlert}
-          hasTestedReceptionist={hasTestedReceptionist}
-          handleContinue={handleContinue}
         />
       )}
     </div>

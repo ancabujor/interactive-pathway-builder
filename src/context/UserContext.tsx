@@ -7,6 +7,7 @@ export type UserData = {
   email: string;
   calculatedProfit: number;
   isQualified: boolean;
+  hasTestedReceptionist?: string;
 };
 
 interface UserContextType {
@@ -26,6 +27,7 @@ const defaultUserData: UserData = {
   email: '',
   calculatedProfit: 0,
   isQualified: false,
+  hasTestedReceptionist: undefined,
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);

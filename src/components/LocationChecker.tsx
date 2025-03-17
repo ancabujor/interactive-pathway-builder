@@ -9,12 +9,28 @@ import { useLocationChecker } from '@/hooks/useLocationChecker';
 import { useEmailSubmission } from '@/hooks/useEmailSubmission';
 import ReadyButton from '@/components/location/ReadyButton';
 import ReadyEmailForm from '@/components/location/ReadyEmailForm';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Info } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
+import { Label } from '@/components/ui/label';
 
 interface LocationCheckerProps {
   onQualified: () => void;
+  handleReceptionistResponse: (value: string) => void;
+  showReceptionistAlert: boolean;
+  hasTestedReceptionist: string | undefined;
+  handleContinue: () => void;
 }
 
-const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
+const LocationChecker: React.FC<LocationCheckerProps> = ({ 
+  onQualified, 
+  handleReceptionistResponse, 
+  showReceptionistAlert, 
+  hasTestedReceptionist,
+  handleContinue 
+}) => {
   const {
     location,
     loading,
@@ -76,12 +92,44 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({ onQualified }) => {
           ) : (
             <>
               {location && !showWaitlist && (
-                <CompanyDetailsForm 
-                  companyName={companyName} 
-                  clientCount={clientCount} 
-                  onCompanyNameChange={handleCompanyNameChange} 
-                  onClientCountChange={handleClientCountChange} 
-                />
+                <>
+                  <CompanyDetailsForm 
+                    companyName={companyName} 
+                    clientCount={clientCount} 
+                    onCompanyNameChange={handleCompanyNameChange} 
+                    onClientCountChange={handleClientCountChange} 
+                  />
+                  
+                  {/* Receptionist dropdown appearing right after client count */}
+                  <div className="space-y-2 mt-4">
+                    <Label htmlFor="receptionist-test">Have you tested our AI receptionist?</Label>
+                    <Select onValueChange={handleReceptionistResponse} value={hasTestedReceptionist}>
+                      <SelectTrigger id="receptionist-test" className="w-full">
+                        <SelectValue placeholder="Select an option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="yes">Yes</SelectItem>
+                        <SelectItem value="no">No</SelectItem>
+                      </SelectContent>
+                    </Select>
+
+                    {showReceptionistAlert && (
+                      <Alert className="mt-3 bg-primary/5 border-primary/20">
+                        <Info className="h-4 w-4" />
+                        <AlertDescription className="text-sm">
+                          As a reseller in our White Label Program, your reputation depends on the quality of solutions you provide. That's why we've made testing your AI receptionist a crucial step in your registration process.
+                        </AlertDescription>
+                      </Alert>
+                    )}
+
+                    {hasTestedReceptionist && (
+                      <Button onClick={handleContinue} className="w-full mt-4">
+                        Continue to Plan Selection
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    )}
+                  </div>
+                </>
               )}
 
               <ReadyButton 
