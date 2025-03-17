@@ -1,8 +1,7 @@
 
 import React from 'react';
-import { ArrowRight, Info } from 'lucide-react';
+import { Info } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface StageSelectorProps {
@@ -40,13 +39,6 @@ const StageSelector: React.FC<StageSelectorProps> = ({
             As a reseller in our White Label Program, your reputation depends on the quality of solutions you provide. That's why we've made testing your AI receptionist a crucial step in your registration process.
           </AlertDescription>
         </Alert>
-      )}
-
-      {hasTestedReceptionist && (
-        <Button onClick={handleContinue} className="w-full mt-4">
-          Continue to Plan Selection
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
       )}
     </div>
   );

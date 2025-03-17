@@ -36,6 +36,17 @@ export function useStep2() {
     }
   }, [userData.location, userData.companyName, userData.clientCount]);
 
+  // Effect to automatically transition to email stage after selecting receptionist option
+  useEffect(() => {
+    if (hasTestedReceptionist) {
+      if (hasTestedReceptionist === 'no') {
+        navigate('/receptionist-demo');
+      } else {
+        setStage('email');
+      }
+    }
+  }, [hasTestedReceptionist, navigate]);
+
   const handleEmailSubmit = () => {
     if (!email) {
       return;
