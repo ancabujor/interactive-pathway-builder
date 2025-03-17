@@ -6,7 +6,8 @@ import { useUserContext } from '@/context/UserContext';
 export function useStep2() {
   const navigate = useNavigate();
   const { userData, updateUserData, currentStep, setCurrentStep } = useUserContext();
-  const [stage, setStage] = useState<'location' | 'email' | 'receptionist'>('location');
+  // Change the default stage to receptionist after location input
+  const [stage, setStage] = useState<'location' | 'receptionist' | 'email'>('location');
   const [email, setEmail] = useState(userData.email || '');
   const [showPreviewUpdate, setShowPreviewUpdate] = useState(false);
   const [hasTestedReceptionist, setHasTestedReceptionist] = useState<string | undefined>(undefined);
@@ -17,10 +18,10 @@ export function useStep2() {
       setCurrentStep(2);
     }
     
-    // If the user already has an email, skip to the receptionist stage
-    if (userData.email) {
+    // Change the flow: location -> receptionist -> email
+    if (userData.location && !userData.email) {
       setStage('receptionist');
-    } else if (userData.location) {
+    } else if (userData.email) {
       setStage('email');
     } else {
       setStage('location');
@@ -49,18 +50,16 @@ export function useStep2() {
     }
     
     updateUserData({ email });
-    setStage('receptionist');
+    // After email is submitted, we're ready to continue
+    handleContinue();
   };
 
   const handleReceptionistResponse = (value: string) => {
     setHasTestedReceptionist(value);
     setShowReceptionistAlert(true);
     
-    // If they haven't tested the receptionist, we'd redirect them to a demo page
-    if (value === 'no') {
-      // In a real implementation, we would redirect to a demo page
-      console.log("User hasn't tested the receptionist, should redirect to demo");
-    }
+    // After user answers about receptionist, show email form
+    setStage('email');
   };
 
   const handleContinue = () => {
@@ -76,26 +75,27 @@ export function useStep2() {
     if (stage === 'location') {
       setCurrentStep(1);
       navigate('/step1');
-    } else if (stage === 'email') {
-      setStage('location');
     } else if (stage === 'receptionist') {
-      setStage('email');
+      setStage('location');
+    } else if (stage === 'email') {
+      setStage('receptionist');
     }
   };
 
   const handleNextStage = () => {
     if (stage === 'location' && userData.location) {
-      setStage('email');
-    } else if (stage === 'email' && userData.email) {
       setStage('receptionist');
+    } else if (stage === 'receptionist' && hasTestedReceptionist) {
+      setStage('email');
     }
   };
 
   const getStageDescription = () => {
     switch(stage) {
       case 'location': return "Let's build your personalized AI business plan in just 60 seconds";
+      // Update the descriptions to match the new flow
+      case 'receptionist': return "Just one question before we continue with your personalized plan";
       case 'email': return "One last step - where should we send your personalized plan?";
-      case 'receptionist': return "Just one more question before we finalize your plan";
       default: return "";
     }
   };

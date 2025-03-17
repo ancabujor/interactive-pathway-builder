@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useUserContext } from '@/context/UserContext';
 import { useNavigate } from 'react-router-dom';
@@ -33,12 +32,12 @@ export function useEmailSubmission() {
     setShowEmailField(true);
   };
 
-  const handleSubmitEmail = (readyEmail: string, setStage?: (stage: 'location' | 'email' | 'receptionist') => void) => {
+  const handleSubmitEmail = (readyEmail: string, setNextStage?: () => void) => {
     if (readyEmail && validateEmail(readyEmail)) {
       updateUserData({ email: readyEmail });
-      // Instead of directly navigating to step3, move to receptionist stage
-      if (setStage) {
-        setStage('receptionist');
+      // Move to next stage if provided
+      if (setNextStage) {
+        setNextStage();
       }
     } else if (readyEmail) {
       setEmailError('Please enter a valid email address');

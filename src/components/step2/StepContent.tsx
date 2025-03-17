@@ -6,7 +6,7 @@ import EmailForm from '@/components/EmailForm';
 import StageSelector from './StageSelector';
 
 interface StepContentProps {
-  stage: 'location' | 'email' | 'receptionist';
+  stage: 'location' | 'receptionist' | 'email';
   userData: UserData;
   email: string;
   setEmail: (email: string) => void;
@@ -36,20 +36,20 @@ const StepContent: React.FC<StepContentProps> = ({
         <LocationChecker onQualified={handleNextStage} />
       )}
 
-      {stage === 'email' && (
-        <EmailForm
-          email={email}
-          setEmail={setEmail}
-          onSubmit={handleEmailSubmit}
-        />
-      )}
-
       {stage === 'receptionist' && (
         <StageSelector 
           handleReceptionistResponse={handleReceptionistResponse}
           showReceptionistAlert={showReceptionistAlert}
           hasTestedReceptionist={hasTestedReceptionist}
           handleContinue={handleContinue}
+        />
+      )}
+
+      {stage === 'email' && (
+        <EmailForm
+          email={email}
+          setEmail={setEmail}
+          onSubmit={handleEmailSubmit}
         />
       )}
     </div>
