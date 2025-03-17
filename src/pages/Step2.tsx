@@ -9,15 +9,19 @@ import EmailForm from '@/components/EmailForm';
 import ProgressIndicator from '@/components/ProgressIndicator';
 import SimpleFooter from '@/components/SimpleFooter';
 import TrustBuilders from '@/components/TrustBuilders';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { ArrowLeft, ArrowRight, Info } from 'lucide-react';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Step2 = () => {
   const navigate = useNavigate();
   const { userData, updateUserData, currentStep, setCurrentStep } = useUserContext();
-  const [stage, setStage] = useState<'location' | 'email'>('location');
+  const [stage, setStage] = useState<'location' | 'email' | 'receptionist'>('location');
   const [email, setEmail] = useState(userData.email || '');
   const [showPreviewUpdate, setShowPreviewUpdate] = useState(false);
+  const [hasTestedReceptionist, setHasTestedReceptionist] = useState<string | undefined>(undefined);
+  const [showReceptionistAlert, setShowReceptionistAlert] = useState(false);
 
   useEffect(() => {
     if (currentStep !== 2) {
@@ -53,6 +57,23 @@ const Step2 = () => {
     }
     
     updateUserData({ email });
+    setStage('receptionist');
+  };
+
+  const handleReceptionistResponse = (value: string) => {
+    setHasTestedReceptionist(value);
+    setShowReceptionistAlert(true);
+    
+    // If they haven't tested the receptionist, we'd redirect them to a demo page
+    // For now, we'll just show the alert and allow them to continue
+    if (value === 'no') {
+      // In a real implementation, we would redirect to a demo page
+      // For now, we'll just log this and continue with the flow
+      console.log("User hasn't tested the receptionist, should redirect to demo");
+    }
+  };
+
+  const handleContinue = () => {
     setCurrentStep(3);
     navigate('/step3');
   };
@@ -63,6 +84,8 @@ const Step2 = () => {
       navigate('/step1');
     } else if (stage === 'email') {
       setStage('location');
+    } else if (stage === 'receptionist') {
+      setStage('email');
     }
   };
 
@@ -76,6 +99,7 @@ const Step2 = () => {
     switch(stage) {
       case 'location': return "Let's build your personalized AI business plan in just 60 seconds";
       case 'email': return "One last step - where should we send your personalized plan?";
+      case 'receptionist': return "Just one more question before we finalize your plan";
       default: return "";
     }
   };
@@ -115,6 +139,39 @@ const Step2 = () => {
                         onSubmit={handleEmailSubmit}
                       />
                     )}
+
+                    {stage === 'receptionist' && (
+                      <div className="space-y-4">
+                        <label className="text-sm font-medium">
+                          Have you tested our AI receptionist?
+                        </label>
+                        <Select onValueChange={handleReceptionistResponse}>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select an option" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="yes">Yes</SelectItem>
+                            <SelectItem value="no">No</SelectItem>
+                          </SelectContent>
+                        </Select>
+
+                        {showReceptionistAlert && (
+                          <Alert className="mt-3 bg-primary/5 border-primary/20">
+                            <Info className="h-4 w-4" />
+                            <AlertDescription className="text-sm">
+                              As a reseller in our White Label Program, your reputation depends on the quality of solutions you provide. That's why we've made testing your AI receptionist a crucial step in your registration process.
+                            </AlertDescription>
+                          </Alert>
+                        )}
+
+                        {hasTestedReceptionist && (
+                          <Button onClick={handleContinue} className="w-full mt-4">
+                            Continue to Plan Selection
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               </ResizablePanel>
@@ -146,6 +203,39 @@ const Step2 = () => {
                   setEmail={setEmail}
                   onSubmit={handleEmailSubmit}
                 />
+              )}
+
+              {stage === 'receptionist' && (
+                <div className="space-y-4">
+                  <label className="text-sm font-medium">
+                    Have you tested our AI receptionist?
+                  </label>
+                  <Select onValueChange={handleReceptionistResponse}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select an option" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="yes">Yes</SelectItem>
+                      <SelectItem value="no">No</SelectItem>
+                    </SelectContent>
+                  </Select>
+
+                  {showReceptionistAlert && (
+                    <Alert className="mt-3 bg-primary/5 border-primary/20">
+                      <Info className="h-4 w-4" />
+                      <AlertDescription className="text-sm">
+                        As a reseller in our White Label Program, your reputation depends on the quality of solutions you provide. That's why we've made testing your AI receptionist a crucial step in your registration process.
+                      </AlertDescription>
+                    </Alert>
+                  )}
+
+                  {hasTestedReceptionist && (
+                    <Button onClick={handleContinue} className="w-full mt-4">
+                      Continue to Plan Selection
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  )}
+                </div>
               )}
             </div>
             
