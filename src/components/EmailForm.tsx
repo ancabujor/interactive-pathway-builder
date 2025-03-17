@@ -30,7 +30,7 @@ const EmailForm: React.FC<EmailFormProps> = ({
     <div className="space-y-4">
       <div className="space-y-3">
         <p className="text-center text-sm">
-          To receive your personalized plan and pricing:
+          Perfect! Your personalized dashboard is ready. Where should we send your business plan?
         </p>
         
         <div className="space-y-1">
