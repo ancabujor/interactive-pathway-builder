@@ -36,15 +36,12 @@ export function useStep2() {
     }
   }, [userData.location, userData.companyName, userData.clientCount]);
 
-  // Effect to automatically transition to email stage after selecting receptionist option
+  // Effect to automatically transition to demo page ONLY for "no" response
   useEffect(() => {
-    if (hasTestedReceptionist) {
-      if (hasTestedReceptionist === 'no') {
-        navigate('/receptionist-demo');
-      } else {
-        setStage('email');
-      }
+    if (hasTestedReceptionist === 'no') {
+      navigate('/receptionist-demo');
     }
+    // We removed the auto-transition for "yes" responses
   }, [hasTestedReceptionist, navigate]);
 
   const handleEmailSubmit = () => {
@@ -70,7 +67,7 @@ export function useStep2() {
   const handleContinue = () => {
     if (hasTestedReceptionist === 'no') {
       navigate('/receptionist-demo');
-    } else {
+    } else if (hasTestedReceptionist === 'yes') {
       setStage('email');
     }
   };

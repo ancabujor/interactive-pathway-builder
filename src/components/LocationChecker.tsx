@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Info } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
 interface LocationCheckerProps {
   onQualified: () => void;
@@ -61,7 +62,7 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({
     handleSubmitEmail(readyEmail);
   };
 
-  const shouldShowReadyButton = location && !showWaitlist && !showEmailField;
+  const shouldShowReadyButton = location && !showWaitlist && !showEmailField && !hasTestedReceptionist;
 
   return (
     <Card className="w-full mx-auto">
@@ -118,6 +119,16 @@ const LocationChecker: React.FC<LocationCheckerProps> = ({
                           As a reseller in our White Label Program, your reputation depends on the quality of solutions you provide. That's why we've made testing your AI receptionist a crucial step in your registration process.
                         </AlertDescription>
                       </Alert>
+                    )}
+
+                    {/* CTA Button for when user selects "Yes" for receptionist test */}
+                    {hasTestedReceptionist === 'yes' && (
+                      <Button 
+                        className="w-full mt-4" 
+                        onClick={handleContinue}
+                      >
+                        Continue to Email Collection
+                      </Button>
                     )}
                   </div>
                 </>
